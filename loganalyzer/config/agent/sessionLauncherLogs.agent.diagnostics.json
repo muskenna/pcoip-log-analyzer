@@ -1,0 +1,75 @@
+{
+    "readme": "",
+    "diagnostics": [
+        {
+            "dataReference": {
+                "signatureName": "Linux Desktop Installed",
+                "groupName": "Install",
+                "domain": "agent.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "name": "Desktop Installed",
+                "category": "Install",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6102#TestLinuxDesktopInstalled"
+                },
+                "notes": "Linux desktop: {desktopName}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Linux No Desktop Installed",
+                "groupName": "Install",
+                "domain": "agent.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "name": "Desktop Installed",
+                "category": "Install",                
+                "result": "Failed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6102#TestLinuxDesktopInstalled",
+                    "fix": "https://help.teradici.com/s/article/6102#TestLinuxDesktopInstalledError"
+                },
+                "notes": "Error message: {errorMessage}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Xorg Server launched",
+                "groupName": "Install",
+                "domain": "agent.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "name": "Xorg Server launched",
+                "category": "Install",                
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6102#TestLinuxXOrg"
+                },
+                "notes": "Xorg server launched successfully"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Xorg Server failed to launch",
+                "groupName": "Install",
+                "domain": "agent.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "name": "Xorg Server launched",
+                "category": "Install",                
+                "result": "Failed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6102#TestLinuxXOrg",
+                    "fix": "https://help.teradici.com/s/article/6102#TestXOrgError"
+                },
+                "notes": "Xorg Server failed to launch<br>Error message: {errorMessage}"
+            }
+        }                       
+    ]
+}

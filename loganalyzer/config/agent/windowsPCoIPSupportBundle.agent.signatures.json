@@ -1,0 +1,171 @@
+{
+    "Install": {
+        "domain": "agent.pcoip.teradici",
+        "signatures": [
+            {
+                "signatureName": "PCoIP cloud license configuration",
+                "signaturePattern": "Set host ID to type = (.*), value = (.*)(?:\n^.+$|\n$)+?\n.*Licenses available from (.*teradici\\.compliance\\.flexnetoperations\\.com\/instances\/.*)\/request:$(?:\n^.+$|\n$)+?\n.*floating server ID.*value = (.*)$",
+                "labels": [
+                    "hostType",
+                    "hostId",
+                    "licenseServerURL",
+                    "serverIdFromFNEDump"
+                ],
+                "samples": [
+                    "Set host ID to type = 3, value = YYYYYYYYYYYY",
+                    "Licenses available from https://teradici.compliance.flexnetoperations.com/instances/ZZZZZZZZZZZZ/request:",
+                    "floating server ID: type = 8, value = ZZZZZZZZZZZZ"
+                ]
+            },
+            {
+                "signatureName": "PCoIP cloud license configuration with missing server id",
+                "signaturePattern": "Set host ID to type = (.*), value = (.*)(?:\n^.+$|\n$)+?\n.*Licenses available from (.*teradici\\.compliance\\.flexnetoperations\\.com\/instances\/.*)\/request:$(?:\n^.+$|\n$)+?\n.*ERROR.*pcoip-license-tool\\.exe",
+                "labels": [
+                    "hostType",
+                    "hostId",
+                    "licenseServerURL"
+                ],
+                "samples": [
+                    "Set host ID to type = 3, value = YYYYYYYYYYYY",
+                    "Licenses available from https://teradici.compliance.flexnetoperations.com/instances/ZZZZZZZZZZZZ/request:",
+                    "ERROR: Signature check failed for C:\\Program Files\\Teradici\\PCoIP Agent\\bin\\pcoip-license-tool.exe"
+                ]
+            },            
+            {
+                "signatureName": "PCoIP local license configuration",
+                "signaturePattern": "Set host ID to type = (.*), value = (.*)(?:\n^.+$|\n$)+?\n^(?!.*teradici.compliance.flexnetoperations.com)Licenses available from (.*)\/request:(?:\n^.+$|\n$)+?\n.*floating server ID.*value = (.*)$",
+                "labels": [
+                    "hostType",
+                    "hostId",
+                    "licenseServerURL",
+                    "serverIdFromFNEDump"
+                ],
+                "samples": [
+                    "Set host ID to type = 3, value = YYYYYYYYYYYY",
+                    "Licenses available from https://10.0.0.52/request:",
+                    "floating server ID: type = 8, value = ZZZZZZZZZZZZ"
+                ]
+            },
+            {
+                "signatureName": "PCoIP local license configuration with missing server id",
+                "signaturePattern": "Set host ID to type = (.*), value = (.*)(?:\n^.+$|\n$)+?\n^(?!.*teradici.compliance.flexnetoperations.com)Licenses available from (.*)\/request:(?:\n^.+$|\n$)+?\n.*ERROR.*pcoip-license-tool\\.exe",
+                "labels": [
+                    "hostType",
+                    "hostId",
+                    "licenseServerURL"
+                ],
+                "samples": [
+                    "Set host ID to type = 3, value = YYYYYYYYYYYY",
+                    "Licenses available from https://10.0.0.52/request:",
+                    "ERROR: Signature check failed for C:\\Program Files\\Teradici\\PCoIP Agent\\bin\\pcoip-license-tool.exe"
+                ]
+            },                                          
+            {
+                "signatureName": "PCoIP license is not configuration - Windows - host id available - FNE dump failed",
+                "signaturePattern": "Set host ID to type = (.*), value = (.*)(?:\n^.+$|\n$)+?\n.*pcoip-list-licenses.ps1 stderr:Error executing command, list licenses, cause:.*(?:\n^.+$|\n$)+?\n.*ERROR.*pcoip-license-tool\\.exe",
+                "labels": [
+                    "hostType",
+                    "hostId"
+                ],
+                "samples": [
+                    "C:\\Program Files\\Teradici\\PCoIP Agent\\pcoip-list-licenses.ps1 stderr:Error executing command, list licenses, cause: no servers are available to list licenses on",
+                    "ERROR: Signature check failed for C:\\Program Files\\Teradici\\PCoIP Agent\\bin\\pcoip-license-tool.exe"
+                ]
+            },
+            {
+                "signatureName": "PCoIP license is not configuration - Windows - only host id available",
+                "signaturePattern": "Set host ID to type = (.*), value = (.*)(?:\n^.+$|\n$)+?\n.*pcoip-list-licenses.ps1 stderr:Error executing command, list licenses, cause: (.*)(?:\n^.+$|\n$)+?\n.*    floating server ID: type = 0, value = <empty>$",
+                "labels": [
+                    "hostType",
+                    "hostId",                    
+                    "errorMessage"
+                ],
+                "samples": [
+                    "C:\\Program Files\\Teradici\\PCoIP Agent\\pcoip-list-licenses.ps1 stderr:Error executing command, list licenses, cause: no servers are available to list licenses on",
+                    "floating server ID: type = 0, value = <empty>"
+                ]
+            },
+            {
+                "signatureName": "PCoIP license is not configuration - Windows - host id and server id available",
+                "signaturePattern": "Set host ID to type = (.*), value = (.*)(?:\n^.+$|\n$)+?\n.*pcoip-list-licenses.ps1 stderr:Error executing command, list licenses, cause: (.*)(?:\n^.+$|\n$)+?\n.*floating server ID.*value = (.*)$(?:\n^.+$|\n$)+?\n.*floating features.*$(?:\n^.+$|\n)+.*Session.*ISSUER.*\n.*Valid for acquisition$",
+                "labels": [
+                    "hostType",
+                    "hostId",                    
+                    "errorMessage",
+                    "serverIdFromFNEDump"
+                ],
+                "samples": [
+                    "Set host ID to type = 3, value = AC1F6B40B1F4",
+                    "C:\\Program Files\\Teradici\\PCoIP Agent\\pcoip-list-licenses.ps1 stderr:Error executing command, list licenses, cause: no servers are available to list licenses on",
+                    "floating server ID: type = 8, value = 8TNGXGCPN0M5"
+                ]
+            },            
+            {
+                "signatureName": "PCoIP license is not configuration - Windows - no additional information available",
+                "signaturePattern": "Could not set either.*(?:\n^.+$|\n$)+?\n.*pcoip-list-licenses.ps1 stderr:Error executing command, list licenses, cause: (.*)(?:\n^.+$|\n$)+?\n.*floating server ID: type = 0, value = <empty>$",
+                "labels": [
+                    "errorMessage"
+                ],
+                "samples": [
+                    "Could not set either VM UUID or ethernet for host ID, using default behaviour",
+                    "C:\\Program Files\\Teradici\\PCoIP Agent\\pcoip-list-licenses.ps1 stderr:Error executing command, list licenses, cause: no servers are available to list licenses on",
+                    "floating server ID: type = 0, value = <empty>"
+                ]
+            },            
+            {
+                "signatureName": "PCoIP license is not configuration - Windows - registration Failure due to machine being used in a different organization",
+                "signaturePattern": ".*Failed to register with the.*\"(.*)\"\\. Host \"(.*)\" may.*",
+                "labels": [
+                    "licenseServerURL",
+                    "hostname"
+                ],
+                "samples": [
+                    "2021-10-07T02:44:12.3148374Z> <ERROR>: Powershell command stderr: Failed to register with the cloud license server https://teradici.compliance.flexnetoperations.com/instances/A2VE7934QC45/request. Host HARENTALDP001 may already be registered with https://teradici.compliance.flexnetoperations.com/instances/A2VE7934QC45/request under a different registration. For resolution, contact Teradici support at support.teradici.com. Provide the name of your machine HARENTALDP001 and the support bundle."
+                ]
+            }, 
+            {
+                "signatureName": "PCoIP license is not configuration - Windows - host id has changed v1",
+                "signaturePattern": "Set host ID to type = (.*), value = (.*)(?:\n^.+$|\n$)+?\n.*floating server ID.*value = (.*)$(?:\n^.+$|\n$)+?\n.*Not valid for acquisition: Trusted storage hostid does not match system hostid.*$",
+                "labels": [
+                    "hostType",
+                    "hostId",
+                    "serverIdFromFNEDump"                    
+                ],
+                "samples": [
+                    "BEGIN FNE debug dump",
+                    "Not valid for acquisition: Trusted storage hostid does not match system hostid."
+                ]
+            },
+            {
+                "signatureName": "PCoIP license is not configuration - Windows - host id has changed v2",
+                "signaturePattern": ".*Host ID was set via FNE.*FNE is (.*) (.*)(?:\n^.+$|\n$)+?\n.*floating server ID.*value = (.*)$(?:\n^.+$|\n$)+?\n.*Not valid for acquisition: Trusted storage hostid does not match system hostid.*$",
+                "labels": [
+                    "hostType",
+                    "hostId",
+                    "serverIdFromFNEDump"                    
+                ],
+                "samples": [
+                    "BEGIN FNE debug dump",
+                    "Not valid for acquisition: Trusted storage hostid does not match system hostid."
+                ]
+            },                                    
+            {
+                "signatureName": "NVIDIA GRID Licensed",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z)>(\\s).*(?:\n^.+$)+\n\n.*(?:\n^.+$)+\n\n.*(?:\n^.+$)+?\n.*GRID Licensed Product$\n.*Product Name.*: (.*)\n.*License Status.*Licensed$",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "productName"
+                ],
+                "samples": [
+                    "2021-03-22T16:35:43.5265841Z> <DEBUG>: ",
+                    "==============NVSMI LOG==============",
+                    "...",
+                    "    GRID Licensed Product",
+                    "        Product Name                      : Quadro Virtual Data Center Workstation",
+                    "        License Status                    : Licensed"
+                ]
+            }                                                 
+        ]
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "Install": {
+        "domain": "agent.pcoip.teradici",
+        "signatures": [
+            {
+                "signatureName": "NVIDIA Video Adapter from Xorg",
+                "signaturePattern": ".*\\): NVIDIA GPU (.*) \\(.*\\) at .*$",
+                "labels": [
+                    "videoAdapter"
+                ],
+                "samples": [
+                    "[332158.919] (II) NVIDIA(0): NVIDIA GPU Quadro RTX 6000 (TU102GL-A) at PCI:45:0:0 (GPU-0)"
+                ]
+            }      
+        ]
+    }
+}

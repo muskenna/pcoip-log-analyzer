@@ -1,0 +1,25 @@
+{
+    "archived": [
+        {
+            "readme": "The diagnostic is not directly printed on the report, but rather used in combination with Driver Version diagostic",
+            "diagnostics": [
+                {
+                    "dataReference": {
+                        "signatureName": "NVIDIA GRID Licensed",
+                        "groupName": "Install",
+                        "domain": "agent.pcoip.teradici"
+                    },
+                    "diagnostic": {
+                        "name": "NVIDIA GRID Licensed",
+                        "category": "Display",
+                        "result": "Passed",
+                        "urls": {
+                            "description": "https://help.teradici.com/s/article/6102#TestDriverInstalled"
+                        },
+                        "notes": "NVIDIA GRID Licensed<br>License type:{productName}"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,54 @@
+{
+    "Install": {
+        "domain": "agent.pcoip.teradici",
+        "signatures": [
+            {
+                "signatureName": "Linux Desktop Installed",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*LAUNCHER :launchDesktop: launching (.*) desktop$",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "desktopName"
+                ],
+                "samples": [
+                    "2021-06-11T18:12:31.311Z 53d32000-ad0e-1039-8b3a-000000000000 > LVL:2 RC:   0        LAUNCHER :launchDesktop: launching mate desktop"
+                ]
+            },
+            {
+                "signatureName": "Linux No Desktop Installed",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z).*Failed to process launcher request.*(No desktops installed.*)$",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "errorMessage"
+                ],
+                "samples": [
+                    "2021-03-19T10:39:37.123Z ae246200-6acc-1039-92ca-000000000000 > LVL:1 RC: -500      LAUNCHER :receiveMessage: Failed to process launcher request. No desktops installed. Cannot launch a session"
+                ]
+            },
+            {
+                "signatureName": "Xorg Server launched",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*launchXorg: launching Xorg$",
+                "labels": [
+                    "timestamp",
+                    "sessionid"
+                ],
+                "samples": [
+                    "2021-06-11T18:12:30.028Z 53d32000-ad0e-1039-8b3a-000000000000 > LVL:2 RC:   0        LAUNCHER :launchXorg: launching Xorg"
+                ]
+            },
+            {
+                "signatureName": "Xorg Server failed to launch",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*(Segmentation fault.*Server aborting.*)$",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "errorMessage"
+                ],
+                "samples": [
+                    "2021-03-19T10:39:37.123Z ae246200-6acc-1039-92ca-000000000000 > LVL:1 RC: -500      LAUNCHER :receiveMessage: (EE) Caught signal 11 (Segmentation fault). Server aborting"
+                ]
+            }            
+        ]
+    }
+}

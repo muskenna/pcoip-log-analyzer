@@ -1,0 +1,57 @@
+{
+    "Notes": "pcoip_vhid is being capture as server log, so it need review",
+    "products": [
+        {
+            "client": [
+                {
+                    "contentType": "clientLogs",
+                    "signature": ".*LVL:2 RC:   0          CLIENT.*"
+                }
+            ]
+        },
+        {
+            "agent": [
+                {
+                    "contentType": "agentLogs",
+                    "fileNameSignature": "",
+                    "signature": ".*> LVL:2.*(COMMON :-- pcoip_agent begins.*|AGENT :Agent type.*|AGENT :Attempting to get license.*|AGENT :.*Launching server.*|AGENT :transition.*)"
+                },
+                {
+                    "contentType": "serverLogs",
+                    "fileNameSignature": "",
+                    "signature": ".*> LVL:2.*(COMMON :-- pcoip_server begins.*|SERVER :start server.*|SERVER :server main.*)"
+                },
+                {
+                    "contentType": "sessionLauncherLogs",
+                    "fileNameSignature": "",
+                    "signature": "^([0-9-]+T[0-9:.]+Z).*LAUNCHER :run: starting session launcher"
+                },
+                {
+                    "contentType": "windowsControlPanelLogs",
+                    "fileNameSignature": "",
+                    "signature": ".*PCoIP Control Panel"
+                },
+                {
+                    "contentType": "windowsPCoIPSupportBundle",
+                    "fileNameSignature": "",
+                    "signature": "^Support bundle created on"
+                },                         
+                {
+                    "contentType": "nvidia-smi",
+                    "fileNameSignature": "",
+                    "signature": ".*NVSMI LOG"
+                },
+                {
+                    "contentType": "linuxPcoipLicenseOut",
+                    "fileNameSignature": "",
+                    "signature": ".*\nLicenses available from http.*request:"
+                },
+                {
+                    "contentType": "linuxXorg",
+                    "fileNameSignature": "",
+                    "signature": ".*\nX.Org X Server"
+                }                
+            ]
+        }
+    ]
+}

@@ -1,0 +1,608 @@
+{
+    "Install": {
+        "domain": "client.pcoip.teradici",
+        "signatures": [
+            {
+                "_readme": "The product info is used for multiple logics, so code change is required if signature name change is required",
+                "signatureName": "Product Info",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*Teradici Module name = Teradici PCoIP (Desktop Client).*Version Number = (.*), Internal.*$(?:\n^.+$|\n$)+?\n.*System Info.*$(?:\n|\r\n)+^.*COMMON :.*(Windows|Linux|MacOS).*",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "type",
+                    "version",
+                    "operatingSystem"
+                ],
+                "samples": [
+                    "2021-06-15T08:14:20.375Z 00000000-0000-0000-0000-000000000000 LVL:0 RC:   0          COMMON :Teradici Module name = Teradici PCoIP Desktop Client TERA_EVENT, Version Number = 21.01.0, Internal product version = @0d0b055701"
+                ]
+            },
+            {
+                "signatureName": "Operating System",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*System Info.*$(?:\n|\r\n?)+^.*COMMON :(.*(?:Windows|Linux|macOS|MacOS).*)$",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "type"
+                ],
+                "sample": [
+                    "2021-06-03T22:06:32.417Z 00000000-0000-0000-0000-000000000000 LVL:2 RC:   0          COMMON :**** System Info",
+                    "2021-04-06T13:02:58.181Z 00000000-0000-0000-0000-000000000000 LVL:2 RC:   0          COMMON :Windows 10 Professional (10.0 build 18363)"
+                ]
+            },
+            {
+                "signatureName": "Physical Memory Available",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*:(\\d+)MB\/(\\d+)MB of physical memory available",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "availableMB",
+                    "installedMB"
+                ],
+                "sample": [
+                    "2021-03-26T21:33:15.525Z 00000000-0000-0000-0000-000000000000 LVL:2 RC:   0          COMMON :36397MB/65536MB of physical memory available"
+                ]
+            },
+            {
+                "signatureName": "Ultra Supported",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*COMMON :cpu_intrinsics_report: (CPU supports\\s*AVX2)$",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "message"
+                ],
+                "sample": [
+                    "2021-07-09T18:02:30.730Z 00000000-0000-0000-0000-000000000000 LVL:0 RC:   0          COMMON :cpu_intrinsics_report: CPU does not support AVX2"
+                ]
+            },
+            {
+                "signatureName": "Ultra Not Supported",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*COMMON :cpu_intrinsics_report: (CPU does not support AVX2)$$",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "message"
+                ],
+                "sample": [
+                    "2021-07-09T18:02:30.730Z 00000000-0000-0000-0000-000000000000 LVL:0 RC:   0          COMMON :cpu_intrinsics_report: CPU does not support AVX2"
+                ]
+            }
+        ]
+    },
+    "PreSession": {
+        "domain": "client.pcoip.teradici",
+        "signatures": [
+            {
+                "signatureName": "Client Hostname",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) 00000000-0000-0000-0000-000000000000 LVL.*<hello>(?:\n^.+$)+?\n.*<hostname>(.*)<\/hostname>$",
+                "labels": [
+                    "timestamp",
+                    "hostname"
+                ],
+                "samples": [
+                    "2021-09-02T17:01:25.679Z 00000000-0000-0000-0000-000000000000 LVL:2 RC:   0          BROKER :XML:   <hello>",
+                    "2021-09-02T17:01:25.679Z 00000000-0000-0000-0000-000000000000 LVL:2 RC:   0          BROKER :XML:       <hostname>plcasclient</hostname>"
+                ]
+            },
+            {
+                "signatureName": "Broker Certificate Validation Succeded - Brokered Connection",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*QUERYBROKER :Exception =No such node \\((.*)\\).*$(?:\n^.+$)+?\n.*<pcm-info>(?:\n^.+$)+?\n.*security mode.*(?:\n^.+$)+?\n.*verify_server_pbp result is PASSED.*$",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "hostname"
+                ],
+                "samples": [
+                    "2021-03-29T23:28:24.434Z 00000000-0000-0000-0000-000000000000 LVL:2 RC:   0     QUERYBROKER :Exception =No such node (la1cac002.psyop.tv).",
+                    "2021-03-29T23:28:25.100Z 00000000-0000-0000-0000-000000000000 LVL:2 RC:   0          BROKER :XML:     <pcm-info>",
+                    "2021-11-24T22:04:12.913Z 00000000-0000-0000-0000-000000000000 LVL:2 RC:   0          BROKER :security mode: 1",
+                    "2021-11-24T22:04:12.968Z 61205600-2fa0-103a-9dd5-005056965995 LVL:2 RC:   0          BROKER :verify_server_pbp result is PASSED, pre=TRUE sys=FALSE hn=TRUE kl=TRUE ocsp=TRUE sscl=FALSE error[2]=0"
+                ]
+            },                     
+            {
+                "signatureName": "Broker Certificate Validation Succeded - Direct Connection",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*Direct-Connect Broker.*(?:\n^.+$)+?\n.*<hostname>(.*)<\/hostname>(?:\n^.+$)+?\n.*security mode.*(?:\n^.+$)+?\n.*verify_server_pbp result is PASSED.*$",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "hostname"
+                ],
+                "samples": [
+                    "2021-11-24T22:04:12.866Z 00000000-0000-0000-0000-000000000000 LVL:2 RC:   0          BROKER :XML:         <product-name>PCoIP Standard Agent for Windows Direct-Connect Broker</product-name>",
+                    "2021-11-24T22:04:12.866Z 00000000-0000-0000-0000-000000000000 LVL:2 RC:   0          BROKER :XML:         <hostname>pl-win-std-01</hostname>",
+                    "2021-11-24T22:04:12.913Z 00000000-0000-0000-0000-000000000000 LVL:2 RC:   0          BROKER :security mode: 1",
+                    "2021-11-24T22:04:12.968Z 61205600-2fa0-103a-9dd5-005056965995 LVL:2 RC:   0          BROKER :verify_server_pbp result is PASSED, pre=TRUE sys=FALSE hn=TRUE kl=TRUE ocsp=TRUE sscl=FALSE error[2]=0"
+                ]
+            },
+            {
+                "signatureName": "Broker Certificate Validation failed - Self-Signed Cert",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*security mode.*(?:\n^.+$)+?\n.*Subject name: (.*)\n.*Issuer name: (.*)\n.*(Self signed cert detected in single cert length chain.*)$",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "subjectName",
+                    "issuerName",
+                    "errorMessage"
+                ],
+                "samples": [
+                    "2021-06-07T14:20:06.375Z 00000000-0000-0000-0000-000000000000 LVL:2 RC:   0          BROKER :security mode: 1",
+                    "2021-06-07T14:20:06.599Z 00000000-0000-0000-0000-000000000000 LVL:2 RC:   0          BROKER :Self signed cert detected in single cert length chain",
+                    "2021-06-07T14:20:06.599Z 00000000-0000-0000-0000-000000000000 LVL:2 RC:   0          BROKER :verify_server_pbp result is FAILED_BUT_WARNABLE, pre=TRUE sys=FALSE hn=TRUE kl=TRUE ocsp=TRUE sscl=TRUE error[0]=13"
+                ]
+            },                      
+            {
+                "signatureName": "Broker Certificate Validation failed - Unknown CA detected",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*security mode.*(?:\n^.+$)+?\n.*Subject name: (.*)\n.*Issuer name: (.*)\n.*(Unknown CA detected in chain.*)$",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "subjectName",
+                    "issuerName",
+                    "errorMessage"
+                ],
+                "samples": [
+                    "2021-03-31T17:33:00.923Z 00000000-0000-0000-0000-000000000000 LVL:2 RC:   0          BROKER :verify_server_pbp result is FAILED_BUT_WARNABLE, pre=FALSE sys=FALSE hn=TRUE kl=TRUE ocsp=TRUE sscl=FALSE error[0]=29"
+                ]
+            },
+            {
+                "signatureName": "Session Initialization - Direct Connection",
+                "signaturePattern": "^(?!.*00000000-0000-0000-0000-000000000000)([0-9-]+T[0-9:.]+Z) (.*) LVL.*<hello>(?:\n^.+$)+?\n.*Protected Info.*(?:\n^.+$)+?\n.*<broker-info>.*\n.*Direct-Connect Broker.*(?:\n^.+$)+?\n.*ip-address>(.*)<\/ip-address>$\n(^[0-9-]+T[0-9:.]+Z).*hostname>(.*)<\/hostname>",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "brokerIPAddress",
+                    "endTimestamp",                    
+                    "brokerHostname"
+                ],
+                "samples": [
+                    "2021-06-17T12:30:24.067Z 7cd13600-b190-1039-bfc7-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:   <hello>",
+                    "2021-06-17T12:30:24.067Z 7cd13600-b190-1039-bfc7-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:      <server-address>",
+                    "2021-06-17T12:30:24.067Z 7cd13600-b190-1039-bfc7-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:          <ip-address>24.43.144.154</ip-address>",
+                    "2021-06-17T12:30:24.067Z 7cd13600-b190-1039-bfc7-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:          <hostname>Aarons-iMac-Pro.lan1</hostname>",
+                    "2021-06-17T12:30:24.067Z 7cd13600-b190-1039-bfc7-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:      </server-address>",
+                    "2021-06-17T12:30:24.067Z 7cd13600-b190-1039-bfc7-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:   <hello>",
+                    "2021-06-17T12:30:24.067Z 7cd13600-b190-1039-bfc7-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:   </hello>",
+                    "2021-06-17T12:30:24.363Z 7cd13600-b190-1039-bfc7-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:   <hello-resp>",
+                    "2021-06-17T12:30:24.363Z 7cd13600-b190-1039-bfc7-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:   </hello-resp>"
+                ]
+            },
+            {
+                "signatureName": "Session Initialization - Brokered Connection",
+                "signaturePattern": "^(?!.*00000000-0000-0000-0000-000000000000)([0-9-]+T[0-9:.]+Z) (.*) LVL.*<hello>(?:\n^.+$)+?\n.*<server-address>$\n.*<ip-address>(.*)<\/ip-address>(?:\n^.+$)+?\n^([0-9-]+T[0-9:.]+Z).*<pcm-info>",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "brokerIPAddress",                   
+                    "endTimestamp"                  
+
+                ],
+                "samples": [
+                    "2021-06-17T12:30:24.067Z 7cd13600-b190-1039-bfc7-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:   <hello>",
+                    "2021-06-17T12:30:24.067Z 7cd13600-b190-1039-bfc7-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:      <server-address>",
+                    "2021-06-17T12:30:24.067Z 7cd13600-b190-1039-bfc7-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:          <ip-address>24.43.144.154</ip-address>",
+                    "2021-06-17T12:30:24.067Z 7cd13600-b190-1039-bfc7-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:          <hostname>Aarons-iMac-Pro.lan1</hostname>",
+                    "2021-06-17T12:30:24.067Z 7cd13600-b190-1039-bfc7-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:      </server-address>",
+                    "2021-06-17T12:30:24.067Z 7cd13600-b190-1039-bfc7-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:   <hello>",
+                    "2021-06-17T12:30:24.067Z 7cd13600-b190-1039-bfc7-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:   </hello>",
+                    "2021-06-17T12:30:24.363Z 7cd13600-b190-1039-bfc7-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:   <hello-resp>",
+                    "2021-06-17T12:30:24.363Z 7cd13600-b190-1039-bfc7-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:   </hello-resp>"
+                ]
+            },
+            {
+                "signatureName": "Session Initialization - Failed",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*BROKER :Error: (Unable to connect to .*)$",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "errorMessage"
+                ],
+                "samples": [
+                    "2021-08-03T15:42:38.430Z 00000000-0000-0000-0000-000000000000 LVL:2 RC:   0          BROKER :Error: Unable to connect to hostcard-grafsim-006.stzegs.ads. Please enter a new address or registration code."
+                ]
+            },
+            {
+                "signatureName": "Security Mode Enabled",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*BROKER :security mode: 2$",
+                "labels": [
+                    "timestamp",
+                    "sessionid"
+                ],
+                "sample": [
+                    "2021-06-22T08:00:22.256Z 00000000-0000-0000-0000-000000000000 LVL:2 RC:   0          BROKER :security mode: 0"
+                ]
+            },
+            {
+                "signatureName": "Security Mode Relaxed",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*BROKER :security mode: ([0-1])$",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "value"
+                ],
+                "sample": [
+                    "2021-06-22T08:00:22.256Z 00000000-0000-0000-0000-000000000000 LVL:2 RC:   0          BROKER :security mode: 0"
+                ]
+            },
+            {
+                "signatureName": "Session Authentication via password",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*<authenticate method.*password.*$(?:\n^.+$)+?\n^.*authenticate-resp.*password.*$(?:\n^.+$)+?\n^.*AUTH_SUCCESSFUL_AND_COMPLETE.*\n^([0-9-]+T[0-9:.]+Z).*<result-str>(.*)<\/result-str>$",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "endTimestamp",
+                    "message"                    
+                ],
+                "samples": [
+                    "2021-06-25T23:55:22.566Z 96344b00-b83e-1039-9fbb-005056965995 LVL:2 RC:   0          BROKER :XML:   <authenticate-resp method='password'>",
+                    "2021-06-25T23:55:22.566Z 96344b00-b83e-1039-9fbb-005056965995 LVL:2 RC:   0          BROKER :XML:     <result>",
+                    "2021-06-25T23:55:22.566Z 96344b00-b83e-1039-9fbb-005056965995 LVL:2 RC:   0          BROKER :XML:       <result-id>AUTH_SUCCESSFUL_AND_COMPLETE</result-id>",
+                    "2021-03-29T18:10:08.631Z ddff1100-72e7-1039-8825-000000000000 LVL:2 RC:   0          BROKER :XML:   </authenticate-resp>"
+                ]
+            },
+            {
+                "signatureName": "Session Authentication via MFA",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*<authenticate method.*dialog.*(?:\n^.+$)+?\n^.*<authenticate-resp>$(?:\n^.+$)+?\n^.*AUTH_SUCCESSFUL_AND_COMPLETE.*$\n(^[0-9-]+T[0-9:.]+Z).*<result-str>(.*)<\/result-str>$",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "endTimestamp",
+                    "message"                    
+                ],
+                "samples": [
+                    "2021-06-25T23:55:22.566Z 96344b00-b83e-1039-9fbb-005056965995 LVL:2 RC:   0          BROKER :XML:   <authenticate-resp>",
+                    "2021-06-25T23:55:22.566Z 96344b00-b83e-1039-9fbb-005056965995 LVL:2 RC:   0          BROKER :XML:     <result>",
+                    "2021-06-25T23:55:22.566Z 96344b00-b83e-1039-9fbb-005056965995 LVL:2 RC:   0          BROKER :XML:       <result-id>AUTH_SUCCESSFUL_AND_COMPLETE</result-id>",
+                    "2021-03-29T18:10:08.631Z ddff1100-72e7-1039-8825-000000000000 LVL:2 RC:   0          BROKER :XML:   </authenticate-resp>"
+                ]
+            },            
+            {
+                "signatureName": "Session Authentication - Access Denied",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*<authenticate method.*>(?:\n^.+$)+?\n.*AUTH_FAILED_ACCESS_DENIED.*$\n(^[0-9-]+T[0-9:.]+Z).*<result-str>(.*)<\/result-str>$",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "endTimestamp",
+                    "errorMessage"
+                ],
+                "samples": [
+                    "2021-03-29T18:09:50.677Z ddff1100-72e7-1039-8825-000000000000 LVL:2 RC:   0          BROKER :XML:   <authenticate-resp method='password'>",                    
+                    "2021-03-29T18:09:51.007Z ddff1100-72e7-1039-8825-000000000000 LVL:2 RC:   0          BROKER :XML:       <result-id>AUTH_FAILED_ACCESS_DENIED</result-id>",
+                    "2021-03-29T18:09:51.007Z ddff1100-72e7-1039-8825-000000000000 LVL:2 RC:   0          BROKER :XML:       <result-str>User authentication failed. Please re-enter username, password, and/or domain.</result-str>",
+                    "AUTH_SUCCESSFUL_AND_COMPLETE",
+                    "AUTH_SUCCESSFUL_AND_INCOMPLETE",
+                    "AUTH_FAILED_UNKNOWN_USERNAME_OR_PASSWORD",
+                    "AUTH_FAILED_USER_HAS_NO_RESOURCE",
+                    "AUTH_FAILED_ACCESS_DENIED",
+                    "AUTH_FAILED_UNKNOWN_ USERNAME_OR_ PASSWORD",
+                    "AUTH_FAILED_DIALOG_INVALID_USER_ENTRY",
+                    "AUTH_FAILED_EXPIRED_PASSWORD"
+                ]
+            },
+            {
+                "signatureName": "Session Authentication Failed",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*<authenticate method.*>(?:\n^.+$)+?\n.*(?!.*DENIED)AUTH_FAILED.*$\n(^[0-9-]+T[0-9:.]+Z).*<result-str>(.*)<\/result-str>$",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "endTimestamp",
+                    "errorMessage"
+                ],
+                "samples": [
+                    "2021-03-29T18:09:50.677Z ddff1100-72e7-1039-8825-000000000000 LVL:2 RC:   0          BROKER :XML:   <authenticate-resp method='password'>",                    
+                    "2021-03-29T18:09:51.007Z ddff1100-72e7-1039-8825-000000000000 LVL:2 RC:   0          BROKER :XML:       <result-id>AUTH_FAILED_UNKNOWN_USERNAME_OR_PASSWORD</result-id>",
+                    "2021-03-29T18:09:51.007Z ddff1100-72e7-1039-8825-000000000000 LVL:2 RC:   0          BROKER :XML:       <result-str>User authentication failed. Please re-enter username, password, and/or domain.</result-str>",
+                    "AUTH_SUCCESSFUL_AND_COMPLETE",
+                    "AUTH_SUCCESSFUL_AND_INCOMPLETE",
+                    "AUTH_FAILED_UNKNOWN_USERNAME_OR_PASSWORD",
+                    "AUTH_FAILED_USER_HAS_NO_RESOURCE",
+                    "AUTH_FAILED_ACCESS_DENIED",
+                    "AUTH_FAILED_UNKNOWN_ USERNAME_OR_ PASSWORD",
+                    "AUTH_FAILED_DIALOG_INVALID_USER_ENTRY",
+                    "AUTH_FAILED_EXPIRED_PASSWORD"
+                ]
+            },            
+            {
+                "signatureName": "Resource Listing",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*<get-resource-list>(?:\n^.+$)+?\n.*LIST_SUCCESSFUL.*\n([0-9-]+T[0-9:.]+Z).*<result-str>(.*)<\/result-str>$",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "endTimestamp",
+                    "message"
+                ],
+                "samples": [
+                    "2021-07-09T16:41:22.283Z 65eeb100-c302-1039-a2f0-005056965995 LVL:2 RC:   0          BROKER :XML:   <get-resource-list>",
+                    "2021-06-15T08:14:40.137Z 9da65980-afdf-1039-9197-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:   <get-resource-list-resp>",
+                    "2021-06-15T08:14:40.137Z 9da65980-afdf-1039-9197-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:     <result>",
+                    "2021-06-15T08:14:40.137Z 9da65980-afdf-1039-9197-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:       <result-id>LIST_SUCCESSFUL</result-id>",
+                    "2021-06-15T08:14:40.137Z 9da65980-afdf-1039-9197-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:       <result-str>Successfully retrieved the list of resources</result-str>"
+                ]
+            },
+            {
+                "signatureName": "Resource Listing - Failed",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*<get-resource-list>(?:\n^.+$)+?\n.*LIST_FAILED_NO_ENTITLEMENT.*\n([0-9-]+T[0-9:.]+Z).*<result-str>(.*)<\/result-str>$",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "endTimestamp",
+                    "errorMessage"
+                ],
+                "samples": [
+                    "2021-07-09T16:41:22.283Z 65eeb100-c302-1039-a2f0-005056965995 LVL:2 RC:   0          BROKER :XML:   <get-resource-list>",
+                    "2021-06-15T08:14:40.137Z 9da65980-afdf-1039-9197-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:   <get-resource-list-resp>",
+                    "2021-06-15T08:14:40.137Z 9da65980-afdf-1039-9197-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:     <result>",
+                    "2021-06-15T08:14:40.137Z 9da65980-afdf-1039-9197-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:       <result-id>LIST_FAILED_NO_ENTITLEMENT</result-id>",
+                    "2021-06-15T08:14:40.137Z 9da65980-afdf-1039-9197-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:       <result-str>User has not been assigned any remote workstations</result-str>"
+                ]
+            },
+            {
+                "signatureName": "Resource Allocation",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*<client-info>\n.*\n.*<ip-address>(.*)<\/ip-address>(?:\n^.+$){8}\n.*ALLOC_SUCCESSFUL.*\n.*<result-str>(.*)<\/result-str>$\n.*\n.*<target>$\n^([0-9-]+T[0-9:.]+Z).*<ip-address>(.*)<\/ip-address>",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "clientIPAddress",
+                    "message",
+                    "endTimestamp",
+                    "agentIPAddress"
+                ],
+                "samples": [
+                    "2021-07-09T16:41:23.107Z 65eeb100-c302-1039-a2f0-005056965995 LVL:2 RC:   0          BROKER :XML:   <allocate-resource>",
+                    "2021-06-15T08:16:11.435Z 9da65980-afdf-1039-9197-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:   <allocate-resource-resp>",
+                    "2021-06-15T08:16:11.435Z 9da65980-afdf-1039-9197-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:     <result>",
+                    "2021-06-15T08:16:11.435Z 9da65980-afdf-1039-9197-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:       <result-id>ALLOC_SUCCESSFUL</result-id>",
+                    "2021-06-15T08:16:11.435Z 9da65980-afdf-1039-9197-1c697a6f50fb LVL:2 RC:   0          BROKER :XML:       <result-str>Successfully allocated remote workstation</result-str>"
+                ]
+            },
+            {
+                "signatureName": "Resource Allocation - Failed",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*<allocate-resource>$(?:\n^.+$)+?\n.*<ip-address>(.*)<\/ip-address>$(?:\n^.+$)+?\n.*(?:ALLOC_FAILED.*|ALLOC_PENDING.*)\n(^[0-9-]+T[0-9:.]+Z).*<result-str>(.*)<\/result-str>$",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "hostAddress",
+                    "endTimestamp",
+                    "errorMessage"
+                ],
+                "samples": [
+                    "2021-08-09T16:56:13.110Z 970c0c80-db60-1039-bd8f-000000000000 LVL:2 RC:   0          BROKER :XML:   <allocate-resource>",
+                    "2021-08-09T16:56:13.110Z 970c0c80-db60-1039-bd8f-000000000000 LVL:2 RC:   0          BROKER :XML:       <ip-address>192.168.114.8</ip-address>",
+                    "2021-07-09T16:41:53.506Z 65eeb100-c302-1039-a2f0-005056965995 LVL:2 RC:   0          BROKER :XML:   <allocate-resource-resp>",
+                    "2021-07-09T16:41:53.506Z 65eeb100-c302-1039-a2f0-005056965995 LVL:2 RC:   0          BROKER :XML:       <result-id>ALLOC_FAILED_TO_ALLOCATE_BROKER_PORT_UNREACHABLE</result-id>",
+                    "2021-07-09T16:41:53.506Z 65eeb100-c302-1039-a2f0-005056965995 LVL:2 RC:   0          BROKER :XML:       <result-str>Broker failed to reach resource on port 60443.</result-str>",
+                    "ALLOC_FAILED_TO_ALLOCATE_BROKER_PORT_UNREACHABLE", "ALLOC_FAILED_TO_ALLOCATE_AGENT", "ALLOC_FAILED_NO_LICENSE", "ALLOC_FAILED_TO_ALLOCATE_BROKER", "ALLOC_PENDING_TRY_AGAIN"
+
+                ]
+            },
+            {
+                "signatureName": "PreSession Completed",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*<bye/>(?:\n^.+$)+?\n(^[0-9-]+T[0-9:.]+Z).*<bye-resp/>",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "endTimestamp"
+                ],
+                "samples": [
+                    "2021-03-29T18:10:13.786Z ddff1100-72e7-1039-8825-000000000000 LVL:2 RC:   0          BROKER :XML: <pcoip-client version='2.1'>",
+                    "2021-03-29T18:10:13.786Z ddff1100-72e7-1039-8825-000000000000 LVL:2 RC:   0          BROKER :XML:   <bye/>",
+                    "2021-03-29T18:10:13.786Z ddff1100-72e7-1039-8825-000000000000 LVL:2 RC:   0          BROKER :XML: </pcoip-client>",
+                    "2021-03-29T18:10:13.891Z ddff1100-72e7-1039-8825-000000000000 LVL:2 RC:   0          BROKER :Received XML: ------------------------",
+                    "2021-03-29T18:10:13.891Z ddff1100-72e7-1039-8825-000000000000 LVL:2 RC:   0          BROKER :XML: <pcoip-client version='2.1'>",
+                    "2021-03-29T18:10:13.891Z ddff1100-72e7-1039-8825-000000000000 LVL:2 RC:   0          BROKER :XML:   <bye-resp/>",
+                    "2021-03-29T18:10:13.891Z ddff1100-72e7-1039-8825-000000000000 LVL:2 RC:   0          BROKER :XML: </pcoip-client>"
+                ]
+            }
+        ]
+    },
+    "InSession": {
+        "domain": "client.pcoip.teradici",
+        "signatures": [
+            {
+                "signatureName": "Host Certificate Validation Succeded",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*--> Subject: (.*)$(?:\n^.+$)+?\n.*scnet_validate_by_thumbprint_hash\\): thumbprint hash comparison succeeded(?:\n^.+$)?\n.*:\\(scnet_client_open\\): Connected to (.*)$",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "certSubject",
+                    "hostIpAddress"
+                ],
+                "samples": [
+                    "2021-06-30T00:35:05.055Z e4ac5700-bb68-1039-812a-005056965995 LVL:2 RC:   0     CERTIFICATE :   --> Subject: C=CA,ST=BC,L=Burnaby,O=Teradici,OU=Global Support Service,CN=pl-lnx-std-agent.pllab.local",
+                    "...",
+                    "2021-06-30T00:35:05.055Z e4ac5700-bb68-1039-812a-005056965995 LVL:2 RC:   0           SCNET :(scnet_validate_by_thumbprint_hash): thumbprint hash comparison succeeded",
+                    "2021-03-27T00:50:33.810Z cd148c80-70a8-1039-8fad-000000000000 LVL:2 RC:   0           SCNET :(scnet_client_open): Connected to 24.43.144.154:4172"
+                ]
+            },
+            {
+                "signatureName": "Host Certificate Validation Failed",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*Certificate sent by the Janus server.*(?:\n^.+$)+?\n.*Issuer: (.*)(?:\n^.+$)+?\n.*Subject: (.*)$(?:\n^.+$)+?\n.*CERTIFICATE :verify_certificate: (Certificate chain is incomplete|Certificate chain has an untrusted root|Trust denied.*)$\n.*Certificate \"(.*)\" fails verification",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "issuer",
+                    "subject",
+                    "errorMessage",
+                    "hostName"
+                ],
+                "samples": [
+                    "2021-08-06T20:29:05.688Z 00000000-0000-0000-0000-000000000000 LVL:1 RC:-500     CERTIFICATE :verify_certificate: Certificate \"10.0.158.109\" fails verification"
+                ]
+            },
+            {
+                "signatureName": "Establish Payload",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*In-session processing begins.*(?:\n^.+$)+?\n.*MGMT_SYS :CONNECTED \\((.*),.*\\)$(?:\n^.+$)+?\n(^[0-9-]+T[0-9:.]+Z).*MGMT_SYS :SESSION ACTIVE",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "brokerAddress",
+                    "endTimestamp"                    
+                ],
+                "samples": [
+                    "2021-03-29T23:29:07.194Z 61cef280-7314-1039-9667-000000000000 LVL:2 RC:   0          CLIENT :Pre-session processing complete-----------------------------------",
+                    "2021-03-29T23:29:07.195Z 61cef280-7314-1039-9667-000000000000 LVL:2 RC:   0          CLIENT :In-session processing begins -------------------------------------",
+                    "2021-03-29T23:29:08.330Z 61cef280-7314-1039-9667-000000000000 LVL:2 RC:   0        MGMT_SYS :Connecting with host (10.130.3.103, 00-00-00-00-00-00)",
+                    "2021-03-29T23:29:08.330Z 61cef280-7314-1039-9667-000000000000 LVL:2 RC:   0       MGMT_SSIG :Initiating session with: (10.130.3.103)",
+                    "2021-03-29T23:29:09.449Z 61cef280-7314-1039-9667-000000000000 LVL:2 RC:   0       MGMT_SSIG :Session established successfully (10.130.3.103, 00-00-00-00-00-00, PRI: 0)",
+                    "2021-03-29T23:29:09.492Z 61cef280-7314-1039-9667-000000000000 LVL:1 RC:   0           VGMAC :Connected the PCoIP socket to peer IP 10.130.3.103 peer [UDP] port 4172, socket = 7 in &cblk = aef8af0",
+                    "2021-03-29T23:29:09.663Z 61cef280-7314-1039-9667-000000000000 LVL:2 RC:   0        MGMT_SYS :CONNECTED (10.130.3.103, 00-00-00-00-00-00)",
+                    "2021-03-29T23:29:09.666Z 61cef280-7314-1039-9667-000000000000 LVL:2 RC:   0        MGMT_SYS :SESSION ACTIVE"
+                ]
+            },
+            {
+                "signatureName": "Establish Payload - Failed to establish TCP 4172 connection",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*In-session processing begins.*(?:\n^.+$)+?\n(^[0-9-]+T[0-9:.]+Z).*scnet_client_open\\): Failed to connect to (.*):4172$",
+                "multipleOccurencies": true,                
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "endTimestamp",                    
+                    "brokerAddress"
+                ],
+                "samples": [
+                    "2021-09-02T19:23:03.830Z 184d7b00-ee51-1039-b06c-000000000000 LVL:2 RC:   0          CLIENT :In-session processing begins -------------------------------------",
+                    "2021-09-02T19:23:03.861Z 184d7b00-ee51-1039-b06c-000000000000 LVL:2 RC:   0        MGMT_SYS :Connecting with host (10.0.158.243, 00-00-00-00-00-00)",
+                    "2021-09-02T19:23:03.862Z 184d7b00-ee51-1039-b06c-000000000000 LVL:2 RC:   0       MGMT_SSIG :Initiating session with: (10.0.158.243)",
+                    "2021-09-02T19:23:03.862Z 184d7b00-ee51-1039-b06c-000000000000 LVL:2 RC:-500           SCNET :(scnet_client_open_ssl): tera_sock_connect returned error 10013 - Permission denied!",
+                    "2021-09-02T19:23:03.862Z 184d7b00-ee51-1039-b06c-000000000000 LVL:1 RC:-500           SCNET :(scnet_client_open): Failed to connect to 10.0.158.243:4172"
+                ]
+            },       
+            {
+                "signatureName": "Establish Payload - Failed to establish UDP 4172 connection",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*In-session processing begins.*(?:\n^.+$)+?\n.*scnet_client_open.*Connected to.*(?:\n^.+$)+?\n.*MGMT_SYS :(Connect timeout|Connection denied) \\((.*),.*$",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "errorMessage",
+                    "brokerAddress"
+                ],
+                "samples": [
+                    "2021-09-02T19:55:19.125Z 9744b280-ee55-1039-b3a1-000000000000 LVL:2 RC:   0          CLIENT :In-session processing begins -------------------------------------",
+                    "2021-09-02T19:55:19.137Z 9744b280-ee55-1039-b3a1-000000000000 LVL:2 RC:   0        MGMT_SYS :Connecting with host (10.0.158.243, 00-00-00-00-00-00)",
+                    "2021-09-02T19:55:19.137Z 9744b280-ee55-1039-b3a1-000000000000 LVL:2 RC:   0       MGMT_SSIG :Initiating session with: (10.0.158.243)",
+                    "2021-09-02T19:55:19.161Z 9744b280-ee55-1039-b3a1-000000000000 LVL:2 RC:   0           SCNET :(scnet_client_open): Connected to 10.0.158.243:4172",
+                    "2021-09-02T19:55:20.238Z 9744b280-ee55-1039-b3a1-000000000000 LVL:1 RC:   0           VGMAC :Connected the PCoIP socket to peer IP 10.0.158.243 peer [UDP] port 4172, socket = 2518 in &cblk = f87d7680",
+                    "2021-09-02T19:55:52.118Z 9744b280-ee55-1039-b3a1-000000000000 LVL:2 RC:   0        MGMT_SYS :Connect timeout (10.0.158.243, 00-00-00-00-00-00)"
+                ]
+            },            
+            {
+                "signatureName": "Resolution Negotiation - Request",
+                "signaturePattern": "^(?!.*00000000-0000-0000-0000-000000000000)(?!.*0x0)(?P<timestamp>[0-9-]+T[0-9:.]+Z) (?P<sessionid>.*) LVL:.*(?P<request>mgmt_desktop_service_topology_request): Display (?P<displayid>\\d) requested (?P<width>\\d+)x(?P<height>\\d+).*",
+                "multipleOccurencies": true,
+                "samples": [
+                    "2021-03-26T21:33:43.516Z cd148c80-70a8-1039-8fad-000000000000 LVL:2 RC:   0    MGMT_DESKTOP :mgmt_desktop_service_topology_request: Display 0 requested 2560x1440 @ 0, 0, rotation 0",
+                    "2021-03-26T21:33:43.516Z cd148c80-70a8-1039-8fad-000000000000 LVL:2 RC:   0    MGMT_DESKTOP :mgmt_desktop_service_topology_request: Display 1 requested 2560x1440 @ 2560, 56, rotation 0",
+                    "2021-03-26T21:33:43.516Z cd148c80-70a8-1039-8fad-000000000000 LVL:2 RC:   0    MGMT_DESKTOP :mgmt_desktop_service_topology_request: Display 2 requested 0x0 @ 0, 0, rotation 0",
+                    "2021-03-26T21:33:43.516Z cd148c80-70a8-1039-8fad-000000000000 LVL:2 RC:   0    MGMT_DESKTOP :mgmt_desktop_service_topology_request: Display 3 requested 0x0 @ 0, 0, rotation 0"
+                ]
+            },
+            {
+                "signatureName": "Resolution Negotiation - Response",
+                "signaturePattern": "^(?!.*00000000-0000-0000-0000-000000000000)(?P<timestamp>^[0-9-]+T[0-9:.]+Z) (?P<sessionid>.*) LVL:.*(?P<response>tera_pcoip_client_create_topology_mapping_v2).*(?P<displayid>\\d) w:(?P<width>\\d+) x h:(?P<height>\\d+).*",
+                "multipleOccurencies": true,
+                "samples": [
+                    "2021-03-26T21:33:43.516Z cd148c80-70a8-1039-8fad-000000000000 LVL:2 RC:   0          CLIENT :tera_pcoip_client_create_topology_mapping_v2(): Map (0,0)-> client display 0 w:1024 x h:768 rotation=0",
+                    "2021-03-26T21:33:43.516Z cd148c80-70a8-1039-8fad-000000000000 LVL:2 RC:   0          CLIENT :tera_pcoip_client_create_topology_mapping_v2(): Map (1024,56)-> client display 1 w:2560 x h:1440 rotation=0"
+                ]
+            },
+            {
+                "signatureName": "Resolution Negotiation - Confirmation",
+                "signaturePattern": "^(?!.*00000000-0000-0000-0000-000000000000)(?P<timestamp>^[0-9-]+T[0-9:.]+Z) (?P<sessionid>.*) LVL:.*Received new topology from the host with (?P<numDisplaysreceived>[1-4]).*$",
+                "multipleOccurencies": true,
+                "samples": [
+                    "2021-03-26T22:10:42.734Z cd148c80-70a8-1039-8fad-000000000000 LVL:2 RC:   0          CLIENT :Received new topology from the host with 2 displays."
+                ]
+            },
+            {
+                "signatureName": "Display Mode",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*mgmt_desktop_mode_set: Setting desktop mode to (.*)$",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "mode"
+                ],
+                "samples": [
+                    "2021-03-26T21:33:43.516Z cd148c80-70a8-1039-8fad-000000000000 LVL:2 RC:   0    MGMT_DESKTOP :mgmt_desktop_mode_set: Setting desktop mode to Fullscreen",
+                    "2021-03-29T20:37:18.282Z f0834580-72fb-1039-8420-000000000000 LVL:2 RC:   0    MGMT_DESKTOP :mgmt_desktop_mode_set: Setting desktop mode to Windowed"
+                ]
+            },
+            {
+                "signatureName": "Session Disconnection",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*Connection State Notification: ConnectState: 0, DisconnectCause: (0x\\d*), .*$",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "disconnectCauseId"
+                ],
+                "samples": [
+                    "2021-03-29T23:05:14.799Z 0864c480-7310-1039-8017-000000000000 LVL:2 RC:   0          COMMON :TERA_PCOIP: SESSION_EVENT=TERA_MGMT_SYS_SESS_EVENT_RESET, disconnect cause: 768"
+                ]
+            },
+            {
+                "signatureName": "Packet Loss",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*:Stat frms.*(R=(\\d*)\/(\\d*)\/(\\d*)  T=(\\d*)\/(\\d*)\/(\\d*).*Loss=(.*)%\/(.*)%).*$",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "fullMessage",
+                    "receivedAudio",
+                    "receivedImage",
+                    "receivedOthers",
+                    "transmittedAudio",
+                    "transmittedImage",
+                    "transmittedOthers",
+                    "receptionLoss",
+                    "transmissionLoss"
+                ],
+                "samples": [
+                    "2021-06-16T19:30:40.931Z 00000000-0000-0000-0000-000000000000 LVL:1 RC:   0           VGMAC :Stat frms: R=000000/000000/000000  T=000000/000000/000019 (A/I/O) Loss=0.00%/0.00% (R/T)",
+                    "2021-03-31T23:25:10.408Z c2803b80-748a-1039-96cf-000000000000 LVL:1 RC:   0           VGMAC :Stat frms: R=1069355/1101689/102099  T=000000/000000/1469033 (A/I/O) Loss=1.12%/0.00% (R/T)"
+                ]
+            },
+            {
+                "signatureName": "Latency",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*(round trip time \\(ms\\) =\\s+?(\\d+),.*$)",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "fullMessage",
+                    "roundtrip"
+                ],
+                "samples": [
+                    "2021-03-26T21:34:16.561Z cd148c80-70a8-1039-8fad-000000000000 LVL:2 RC:   0 MGMT_PCOIP_DATA :Tx thread info: round trip time (ms) =  11, variance =   3, rto = 114, last =  10, max =  17"
+                ]
+            },
+            {
+                "signatureName": "Jitter",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*(round trip time.*variance =\\s+?(\\d+),.*$)",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "fullMessage",                    
+                    "variance"
+                ],
+                "samples": [
+                    "2021-03-26T21:34:16.561Z cd148c80-70a8-1039-8fad-000000000000 LVL:2 RC:   0 MGMT_PCOIP_DATA :Tx thread info: round trip time (ms) =  11, variance =   3, rto = 114, last =  10, max =  17"
+                ]
+            }
+        ]
+    }
+}

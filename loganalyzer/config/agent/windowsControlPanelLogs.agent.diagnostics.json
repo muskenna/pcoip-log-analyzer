@@ -1,0 +1,27 @@
+{
+    "readme": "",
+    "diagnostics": [
+        {
+            "dataReference": {
+                "signatureName": "PCoIP license is not configuration - Windows - registration Failure due to machine being used in a different organization",
+                "groupName": "Install",
+                "domain": "agent.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "name": "License Configuration",
+                "category": "Licensing",                
+                "result": "Failed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6071#TestLicenseConfig"
+                },
+                "notes": "PCoIP License is configured using cloud server<br>URL: {licServerURL}<br>Server ID: {URLlicenseServerID}<br>Host ID: {hostIDNew}<br>Host type: {hostIDType}",
+                "advancedOptions": {
+                    "isMainDiagnostic": false,
+                    "isAdditionalDiagnostic": true
+
+                }
+            }
+        }
+    ]
+}

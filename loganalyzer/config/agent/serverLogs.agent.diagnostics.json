@@ -1,0 +1,345 @@
+{
+    "readme": "",
+    "diagnostics": [
+        {
+            "dataReference": {
+                "signatureName": "Accept Payload failed on port TCP 4172",
+                "groupName": "InSession",
+                "domain": "agent.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Accept Payload",
+                "category": "Session",
+                "result": "Failed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6312#TestAcceptPayload",
+                    "fix": "https://help.teradici.com/s/article/6312#TestPayloadError"
+                },
+                "notes": "Agent failed to established TCP 4172 connection with the client"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Accept Payload failed on port UDP 4172",
+                "groupName": "InSession",
+                "domain": "agent.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Accept Payload",
+                "category": "Session",                
+                "result": "Failed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6312#TestAcceptPayload",
+                    "fix": "https://help.teradici.com/s/article/6312#TestPayloadError"
+                },
+                "notes": "Agent failed to established UDP 4172 connection with the client"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Display Driver Version - Teradici PCoIP WDDM",
+                "groupName": "InSession",
+                "domain": "agent.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Display Driver Version",
+                "category": "Display",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6102#TestDriverInstalled"
+                },
+                "notes": "Display Driver Version: Teradici PCoIP WDDM"
+            }
+        },        
+        {
+            "dataReference": {
+                "signatureName": "Display Driver Version - NVIDIA - Windows",
+                "groupName": "InSession",
+                "domain": "agent.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "name": "Display Driver Version",
+                "category": "Display",                
+                "result": "Passed", 
+                "NVIDIADriverVersions": [461.09],
+                "NVIDIADriverVersionsReference": [
+                    "https://www.teradici.com//web-help/pcoip_agent/graphics_agent/windows/21.07/admin-guide/requirements/system-requirements/#compatible-gpus",
+                    "https://www.teradici.com/web-help/pcoip_agent/graphics_agent/windows/21.03/admin-guide/requirements/system-requirements/#compatible-gpus"
+                ],                
+                "NVIDIAGridVideoAdapaters": ["A100", "A40", "A30", "A16", "A10", "V100", "V100DX", "V100X", "V100S","V100L", "T4", "P100", "P40", "P6", "P4", "M60", "M10", "M6"],
+                "NVIDIAGridVideoAdapatersReference": ["https://docs.nvidia.com/grid/latest/grid-vgpu-user-guide/index.html"],
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6102#TestDriverInstalled",
+                    "fix": "https://help.teradici.com/s/article/6102#TestDriverInstalledError"
+                },
+                "notes": "Video adapter: {videoAdapter}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Display Driver Version - NVIDIA - Linux",
+                "groupName": "InSession",
+                "domain": "agent.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "name": "Display Driver Version",
+                "category": "Display",                
+                "result": "Passed",
+                "NVIDIADriverVersions": [460.32],
+                "NVIDIADriverVersionsReference": [
+                    "https://www.teradici.com//web-help/pcoip_agent/graphics_agent/linux/21.07/admin-guide/requirements/system-requirements/#compatible-gpus",
+                    "https://www.teradici.com/web-help/pcoip_agent/graphics_agent/linux/21.03/admin-guide/requirements/system-requirements/#compatible-gpus"
+                ],
+                "NVIDIAGridVideoAdapaters": ["A100", "A40", "A30", "A16", "A10", "V100", "V100DX", "V100X", "V100S","V100L", "T4", "P100", "P40", "P6", "P4", "M60", "M10", "M6"],
+                
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6102#TestDriverInstalled",
+                    "fix": "https://help.teradici.com/s/article/6102#TestDriverInstalledError"
+                },
+                "notes": "Video adapter: {videoAdapter}"
+            }
+        },        
+        {
+            "dataReference": {
+                "signatureName": "Display Driver Version - NVIDIA - Failed Load",
+                "groupName": "InSession",
+                "domain": "agent.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "NVIDIA Driver Loaded",
+                "category": "Display",                
+                "result": "Failed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6102#TestDriverInstalled",
+                    "fix": "https://help.teradici.com/s/article/6312#TestDriverInstalledError"
+                },
+                "notes": "NVIDIA Display Driver failed to load.<br>Error message: {errorMessage}"
+            }
+        },        
+        {
+            "dataReference": {
+                "signatureName": "Headless Host",
+                "groupName": "InSession",
+                "domain": "agent.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "name": "Headless or Deskside",
+                "category": "Display",                
+                "result": "Note",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6102#TestDesksideScenario",
+                    "fix": "https://help.teradici.com/s/article/6102#TestDesksideScenarioError"
+                },
+                "notes": "Host is configured to be headless<br>pcoip.restore_displays_at_session_end = {message}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Deskside Host",
+                "groupName": "InSession",
+                "domain": "agent.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "name": "Headless or Deskside",
+                "category": "Display",                
+                "result": "Note",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6102#TestDesksideScenario",
+                    "fix": "https://help.teradici.com/s/article/6102#TestDesksideScenarioError"
+                },
+                "notes": "Host is configured for Deskside operation<br>pcoip.restore_displays_at_session_end = {message}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Number of Displays - Full Support",
+                "groupName": "InSession",
+                "domain": "agent.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Number of Displays",
+                "category": "Display",                
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6102#TestNumberOfDisplayAdaptors"
+                },
+                "notes": "Number of Displays {number}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Number of Displays - Limited Support",
+                "groupName": "InSession",
+                "domain": "agent.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Number of Displays",
+                "category": "Display",                
+                "result": "Warning",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6102#TestNumberOfDisplayAdaptors",
+                    "fix": "https://help.teradici.com/s/article/6102#TestNumberOfDisplayAdaptorsError"
+                },
+                "notes": "Number of Displays {number}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Non-Accelerated Display Driver",
+                "groupName": "InSession",
+                "domain": "agent.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "name": "Non-Accelerated Display",
+                "category": "Display",                
+                "result": "Failed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6102#TestAcceleratedDisplay",
+                    "fix": "https://help.teradici.com/s/article/6102#TestAcceleratedDisplayError"
+                },
+                "notes": "Non-Accelerated mode is active<br>Adapter name: {adapterName}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Resolution Negotiation - Request",
+                "groupName": "InSession",
+                "domain": "agent.pcoip.teradici"
+            },
+            "diagnostic": {
+                "advancedOptions":{},
+                "name": "Resolution Negotiation",
+                "category": "Display",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6102#TestResolutionNegotiation",
+                    "fix": "https://help.teradici.com/s/article/6102#TestResolutionNegotiationError"
+                }                
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Resolution Negotiation - Response",
+                "groupName": "InSession",
+                "domain": "agent.pcoip.teradici"
+            },
+            "diagnostic": {
+                "advancedOptions":{},
+                "name": "Resolution Negotiation",
+                "category": "Display",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6102#TestResolutionNegotiation",
+                    "fix": "https://help.teradici.com/s/article/6102#TestResolutionNegotiationError"
+                }   
+            }
+        },
+        {
+            "dataReference": {
+                
+                "signatureName": "Resolution Negotiation - Confirmation",
+                "groupName": "InSession",
+                "domain": "agent.pcoip.teradici"
+            },
+            "diagnostic": {
+                "advancedOptions":{},
+                "name": "Resolution Negotiation",
+                "category": "Display",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6102#TestResolutionNegotiation",
+                    "fix": "https://help.teradici.com/s/article/6102#TestResolutionNegotiationError"
+                }   
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Session Disconnect",
+                "groupName": "InSession",
+                "domain": "agent.pcoip.teradici",
+                "isMergingEnabled": false
+            },
+            "diagnostic": {
+                "name": "Session Disconnect",
+                "category": "Session",
+                "result": "Note",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6312#TestDisconnect",
+                    "fix": "https://help.teradici.com/s/article/6312#TestDisconnectSessionNote"
+                },
+                "notes": "Session disconnected for reason id: {disconnectCauseId} (hexidecimal)"
+                
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Packet Loss",
+                "groupName": "InSession",
+                "domain": "agent.pcoip.teradici"
+            },
+            "_disable_aggregationStatement": "countif {received} > 0.02 or {transmitted} > 0.02",
+            "_disable_conditionalStatement": "passed if message else failed",
+            "diagnostic": {
+                "advancedOptions": {
+                    "packetLossThreshould": 0.02
+                },
+                "name": "Packet Loss",
+                "category": "Performance",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6390#TestPacketLoss",
+                    "fix": "https://help.teradici.com/s/article/6390#TestPacketLossErr"
+                },
+                "notes": "RX{received}/TX{transmitted}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Latency",
+                "groupName": "InSession",
+                "domain": "agent.pcoip.teradici"
+            },
+            "_disable_aggregationStatement": "countif {roundtrip} > 250",
+            "_disable_conditionalStatement": "passed if message else failed",
+            "diagnostic": {
+                "advancedOptions": {
+                    "latencyWarningThreshould": 100,
+                    "latencyFailedThreshould": 250                    
+                },
+                "name": "Latency",
+                "category": "Performance",             
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6390#TestLatency",
+                    "fix": "https://help.teradici.com/s/article/6390#TestLatencyErr"
+                },
+                "notes": "Round Trip {roundtrip} ms"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Jitter",
+                "groupName": "InSession",
+                "domain": "agent.pcoip.teradici"
+            },
+            "_disable_aggregationStatement": "countif {variance} > 30",
+            "_disable_conditionalStatement": "passed if message else failed",
+            "diagnostic": {
+                "advancedOptions": {
+                    "jitterWarningThreshould": 30,
+                    "jitterFailedThreshould": 100
+                },
+                "name": "Jitter",
+                "category": "Performance",                
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6390#TestJitter",
+                    "fix": "https://help.teradici.com/s/article/6390#TestJitterErr"
+                },
+                "notes": "Variance {variance} ms"
+            }
+        }
+    ]
+}

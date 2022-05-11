@@ -1,0 +1,75 @@
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+table {
+    table-layout: auto;
+    border-collapse:collapse;
+    width: 100%;
+    margin: 5px;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+td {
+    padding: 7px;
+}
+
+th{
+    padding: 10px;
+}
+
+.summaryTable1, .summaryTable2, .summaryTable3{
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+  }
+  .summaryTable2, .summaryTable3{
+    text-align: center;
+  }
+
+.tableBanner {
+    font-size: xx-large;
+    text-align: center;
+    width: 100%;
+}
+
+/* Align text to the center for the columns 'Start Timestamp' (4th), 'End Timestamp' (5th) and 'Session ID' (6th)*/
+tr td:nth-child(4), tr td:nth-child(5), tr td:nth-child(6) {
+    text-align: center;
+}
+
+#topBanner, #bottomBanner {
+    text-align: center;
+}
+
+#topBanner {
+    font-size: 26px;
+}
+
+table .absorbing-column {
+    width: 12%;
+}
+
+.hiddenResult {
+    display: none;
+  }
+
+/* .resultFilter{
+    color: black;
+    font-size: x-small;
+} */
+
+[id^=resultFilter]{
+    color: black;
+}
+
+#resultFilter2{
+    font-size: x-small;
+}
+
+.summaryTableZeroZeroField{
+    width: 35%;
+}

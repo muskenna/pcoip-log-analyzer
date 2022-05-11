@@ -1,0 +1,81 @@
+{
+    "Install": {
+        "domain": "agent.pcoip.teradici",
+        "signatures": [
+            {
+                "signatureName": "PCoIP cloud license configuration",
+                "signaturePattern": "Set host ID to type = (.*), value = (.*)(?:\n^.+$|\n$)+?\n.*Licenses available from (.*teradici\\.compliance\\.flexnetoperations\\.com\/instances\/.*)\/request:$(?:\n^.+$|\n$)+?\n.*floating server ID.*value = (.*)$",
+                "labels": [
+                    "hostType",
+                    "hostId",
+                    "licenseServerURL",
+                    "serverIdFromFNEDump"
+                ],
+                "samples": [
+                    "Set host ID to type = 3, value = YYYYYYYYYYYY",
+                    "Licenses available from https://teradici.compliance.flexnetoperations.com/instances/ZZZZZZZZZZZZ/request:",
+                    "floating server ID: type = 8, value = ZZZZZZZZZZZZ"
+                ]
+            },
+            {
+                "signatureName": "PCoIP local license configuration",
+                "signaturePattern": "Set host ID to type = (.*), value = (.*)(?:\n^.+$|\n$)+?\n^(?!.*teradici.compliance.flexnetoperations.com)Licenses available from (.*)\/request:(?:\n^.+$|\n$)+?\n.*floating server ID.*value = (.*)$",
+                "labels": [
+                    "hostType",
+                    "hostId",
+                    "licenseServerURL",
+                    "serverIdFromFNEDump"
+                ],
+                "samples": [
+                    "Set host ID to type = 3, value = YYYYYYYYYYYY",
+                    "Licenses available from https://10.0.0.52/request:",
+                    "floating server ID: type = 8, value = ZZZZZZZZZZZZ"
+                ]
+            },
+            {
+                "signatureName": "PCoIP license is not configuration - Linux - host id and server id available",
+                "signaturePattern": "Set host ID to type = (.*), value = (.*)(?:\n^.+$|\n$)+?\n.*Error executing command, list licenses, cause: (.*)(?:\n^.+$|\n$)+?\n.*floating server ID.*value = (.*)$",
+                "labels": [
+                    "hostType",
+                    "hostId",                    
+                    "errorMessage",
+                    "serverIdFromFNEDump"
+                ],
+                "samples": [
+                    "Set host ID to type = 3, value = 244BFEB153D",
+                    "Error executing command, list licenses, cause: no servers are available to list licenses on",
+                    "floating server ID: type = 8, value = 8TNGXGCPN0M5"
+                ]
+            },             
+            {
+                "signatureName": "PCoIP license is not configuration - Linux - server url and id missing",
+                "signaturePattern": "Set host ID to type = (.*), value = (.*)(?:\n^.+$|\n$)+?\n.*no servers are available to list licenses on(?:\n^.+$|\n$)+?\n.*floating server ID: type = 0, value = <empty>$",
+                "labels": [
+                    "hostType",
+                    "hostId"
+                ],
+                "samples": [
+                    "Set host ID to type = 3, value = 244BFEB153D",
+                    "Error executing command, list licenses, cause: no servers are available to list licenses on",
+                    "floating server ID: type = 0, value = <empty>"
+                ]
+            },
+            {
+                "signatureName": "PCoIP license is not configuration - Linux - host id has changed",
+                "signaturePattern": "Set host ID to type = (.*), value = (.*)(?:\n^.+$|\n$)+?\n.*error finding a license at '(.*)\/instances\/.*\/request.*$(?:\n^.+$|\n$)+?\n.*floating server ID: type = 8, value = (.*)(?:\n^.+$|\n$)+?\n.*Trusted storage hostid does not match system hostid.",
+                "labels": [
+                    "hostType",
+                    "hostId",
+                    "licenseServerURL",                   
+                    "serverIdFromFNEDump"                    
+                ],
+                "samples": [
+                    "Set host ID to type = 20, value = i-0a32b6a16809a06dd",
+                    "Cloud License Server: fail, error finding a license at 'https://teradici.compliance.flexnetoperations.com/instances/5NP3V3KH7NP0/request', in grace period which expires in 7 days",
+                    "floating server ID: type = 8, value = 5NP3V3KH7NP0",
+                    "Not valid for acquisition: Trusted storage hostid does not match system hostid."
+                ]
+            }                                     
+        ]
+    }
+}

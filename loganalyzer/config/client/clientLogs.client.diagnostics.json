@@ -1,0 +1,667 @@
+{
+    "readme": "",
+    "diagnostics": [
+        {
+            "dataReference": {
+                "signatureName": "Product Info",
+                "groupName": "Install",
+                "domain": "client.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "name": "Client Type",
+                "category": "Install",                
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6072#TestClientType"
+                },
+                "notes": "{type}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Product Info",
+                "groupName": "Install",
+                "domain": "client.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "advancedOptions":{
+                    "supportedProductVersions": ["21.03.3","21.07.5"]
+                },                   
+                "name": "Client Version",
+                "category": "Install",                
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6072#TestVersion",
+                    "fix": "https://help.teradici.com/s/article/6072#TestVersionError"
+                },
+                "notes": "{version}",
+                "validateVersion": {
+                    "productNameReference": {
+                        "signatureName": "Product Name",
+                        "groupName": "Install",
+                        "domain": "client.pcoip.teradici"
+                    }
+                }
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Operating System",
+                "groupName": "Install",
+                "domain": "client.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "name": "Operating System",
+                "category": "Install",                
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6072#TestOS",
+                    "fix": "https://help.teradici.com/s/article/6072#TestOSError"
+                },
+                "notes": "{type}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Physical Memory Available",
+                "groupName": "Install",
+                "domain": "client.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "name": "Memory Check",
+                "category": "Install",                
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6072#TestMemCheck",
+                    "fix": "https://help.teradici.com/s/article/6072#TestMemError"
+                },
+                "memoryRequirements": [
+                    {
+                        "productName": "Desktop Client",
+                        "minimumAvailableMB": "512",
+                        "minimumInstalledMB": "4098"
+                    }
+                ],
+                "notes": ""
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Ultra Supported",
+                "groupName": "Install",
+                "domain": "client.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "name": "Is host Ultra compatible?",
+                "category": "Install",                
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6072#TestUltra"
+                },
+                "notes": "{message}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Ultra Not Supported",
+                "groupName": "Install",
+                "domain": "client.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Is host Ultra compatible?",
+                "category": "Install",                
+                "result": "Warning",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6072#TestUltra",
+                    "fix": "https://help.teradici.com/s/article/6072#ClientAVX2Upgrade"
+                },
+                "notes": "{message}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Broker Certificate Validation Succeded - Brokered Connection",
+                "groupName": "PreSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "name": "Broker Certificate Validation",
+                "category": "Security",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6311#TestBrokerCertificate"
+                },
+                "notes": "The broker certificate was successfully validated<br>Agent machine: {hostname}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Broker Certificate Validation Succeded - Direct Connection",
+                "groupName": "PreSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "name": "Broker Certificate Validation",
+                "category": "Security",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6311#TestBrokerCertificate"
+                },
+                "notes": "The broker certificate was successfully validated (direct connection)<br>Agent machine: {hostname}"
+            }
+        },        
+        {
+            "dataReference": {
+                "signatureName": "Broker Certificate Validation failed - Self-Signed Cert",
+                "groupName": "PreSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Broker Certificate Validation",
+                "category": "Security",                
+                "result": "Warning",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6311#TestBrokerCertificate",
+                    "fix": "https://help.teradici.com/s/article/6311#TestBrokerCertificateError"
+                },
+                "notes": "The broker certificate is self-signed<br>Subjec name: {subjectName}<br>Issuer name: {issuerName}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Broker Certificate Validation failed - Unknown CA detected",
+                "groupName": "PreSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Broker Certificate Validation",
+                "category": "Security",                
+                "result": "Failed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6311#TestBrokerCertificate",
+                    "fix": "https://help.teradici.com/s/article/6311#TestBrokerCertificateError"
+                },
+                "notes": "The broker certificate validation failed because the root or intermediate certificate(s) '{issuerName}' is missing on the client<br>Subjec name: {subjectName}"
+            }
+        },        
+        {
+            "dataReference": {
+                "signatureName": "Session Initialization - Direct Connection",
+                "groupName": "PreSession",
+                "domain": "client.pcoip.teradici",
+                "isMergingEnabled": true
+            },
+            "diagnostic": {
+                "name": "Session Initialization",
+                "category": "Session",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6311#TestSessionInitialization"
+                },
+                "notes": "Session Initialized - Direct Connection to the Agent<br>Agent Name: {brokerHostname}<br>Agent IP Address: {brokerIPAddress}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Session Initialization - Brokered Connection",
+                "groupName": "PreSession",
+                "domain": "client.pcoip.teradici",
+                "isMergingEnabled": true
+            },
+            "diagnostic": {
+                "name": "Session Initialization",
+                "category": "Session",                
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6311#TestSessionInitialization"
+                },
+                "notes": "Session Initialized - Brokered Connection to the Agent<br>Broker IP Address: {brokerIPAddress}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Session Initialization - Failed",
+                "groupName": "PreSession",
+                "domain": "client.pcoip.teradici",
+                "isMergingEnabled": true
+            },
+            "diagnostic": {
+                "name": "Session Initialization",
+                "category": "Session",                
+                "result": "Failed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6311#TestSessionInitialization",
+                    "fix": "https://help.teradici.com/s/article/6311#TestSessionInitializationError"
+                },
+                "notes": "{errorMessage}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Security Mode Enabled",
+                "groupName": "PreSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Security Mode",
+                "category": "Security",                
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6072#TestSecureMode"
+                },
+                "notes": "Security Mode is set to Full Verification (2)"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Security Mode Relaxed",
+                "groupName": "PreSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Security Mode",
+                "category": "Security",                 
+                "result": "Warning",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6072#TestSecureMode",
+                    "fix": "https://help.teradici.com/s/article/6072#TestSecurityModeErr"
+                },
+                "notes": "Security Mode is set to Relaxed ({value})"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Session Authentication via password",
+                "groupName": "PreSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Session Authentication",
+                "category": "Session",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6311#TestSessionAuthentication"
+                },
+                "notes": "Session Authenticated<br>Message: {message}",
+                "multiStepsTimeout": 3000
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Session Authentication via MFA",
+                "groupName": "PreSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Session Authentication",
+                "category": "Session",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6311#TestSessionAuthentication"
+                },
+                "notes": "Session Authenticated<br>Message: {message}",
+                "multiStepsTimeout": 3000
+            }
+        },        
+        {
+            "dataReference": {
+                "signatureName": "Session Authentication - Access Denied",
+                "groupName": "PreSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Session Authentication",
+                "category": "Session",                
+                "result": "Warning",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6311#TestSessionAuthentication",
+                    "fix": "https://help.teradici.com/s/article/6311#TestSessionAuthenticationError"
+                },
+                "notes": "Error message: {errorMessage}<br>Authentication Failed"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Session Authentication Failed",
+                "groupName": "PreSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Session Authentication",
+                "category": "Session",                
+                "result": "Failed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6311#TestSessionAuthentication",
+                    "fix": "https://help.teradici.com/s/article/6311#TestSessionAuthenticationError"
+                },
+                "notes": "Error message: {errorMessage}<br>Authentication Failed"
+            }
+        },        
+        {
+            "dataReference": {
+                "signatureName": "Resource Listing",
+                "groupName": "PreSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Get a list of hosts",
+                "category": "Session",                
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6311#TestResourceListing"
+                },
+                "notes": "Resources listed<br>Message: {message}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Resource Listing - Failed",
+                "groupName": "PreSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Get a list of hosts",
+                "category": "Session",                
+                "result": "Failed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6311#TestResourceListing",
+                    "fix": "https://help.teradici.com/s/article/6311#TestResourceListingError"
+                },
+                "notes": "Resource listing failed<br>Error message: {errorMessage}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Resource Allocation",
+                "groupName": "PreSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Is host ready?",
+                "category": "Session",                
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6311#TestResourceAllocation"
+                },
+                "notes": "Resource allocated<br>Client IP Address: {clientIPAddress}<br>Agent IP Address: {agentIPAddress}<br>Message: {message}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Resource Allocation - Failed",
+                "groupName": "PreSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Is host ready?",
+                "category": "Session",                
+                "result": "Failed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6311#TestResourceAllocation",
+                    "fix": "https://help.teradici.com/s/article/6311#TestResourceAllocationError"
+                },
+                "notes": "Error message: {errorMessage}<br>Failed to allocate host {hostAddress}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "PreSession Completed",
+                "groupName": "PreSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Pre-Session Completed",
+                "category": "Session",                
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6311#TestSessionSetupCompleted"
+                },
+                "notes": "Pre-session completed"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Host Certificate Validation Succeded",
+                "groupName": "InSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "name": "Host Certificate Validation",
+                "category": "Security",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6311#TestHostCertificate"
+                },
+                "notes": "The host certificate is valid<br>Host IP Address: {hostIpAddress}<br>Subject: {certSubject}<br>"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Host Certificate Validation Failed",
+                "groupName": "InSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Host Certificate Validation",
+                "category": "Security",                
+                "result": "Warning",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6311#TestHostCertificate",
+                    "fix": "https://help.teradici.com/s/article/6311#TestHostCertificateError"
+                },
+                "notes": "{errorMessage}<br>Hostname: {hostName}<br>Issuer: {issuer}<br>Subject: {subject}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Establish Payload",
+                "groupName": "InSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "diagnostic": {
+                "_advancedOptions": {},
+                "name": "Establish Payload",
+                "category": "Session",                
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6311#TestSessionPayload"
+                },
+                "notes": "Client successfully established PCoIP connection with the host {brokerAddress}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Establish Payload - Failed to establish TCP 4172 connection",
+                "groupName": "InSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "diagnostic": {
+                "_advancedOptions": {},
+                "name": "Establish Payload",
+                "category": "Session",
+                "result": "Failed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6311#TestSessionPayload",
+                    "fix": "https://help.teradici.com/s/article/6311#TestSessionPayloadError"
+                },
+                "notes": "Client failed to established TCP 4172 connection with the host {brokerAddress}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Establish Payload - Failed to establish UDP 4172 connection",
+                "groupName": "InSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "diagnostic": {
+                "_advancedOptions": {},
+                "name": "Establish Payload",
+                "category": "Session",
+                "result": "Failed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6311#TestSessionPayload",
+                    "fix": "https://help.teradici.com/s/article/6311#TestSessionPayloadError"
+                },
+                "notes": "{errorMessage}<br>Client failed to established UDP 4172 connection with the host {brokerAddress}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Resolution Negotiation - Request",
+                "groupName": "InSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "diagnostic": {
+                "advancedOptions": {},
+                "name": "Resolution Negotiation",
+                "category": "Display",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6263#TestResolutionNegotiation",
+                    "fix": "https://help.teradici.com/s/article/6263#TestResolutionNegotiationError"
+                }
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Resolution Negotiation - Response",
+                "groupName": "InSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "diagnostic": {
+                "advancedOptions": {},
+                "name": "Resolution Negotiation",
+                "category": "Display",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6263#TestResolutionNegotiation",
+                    "fix": "https://help.teradici.com/s/article/6263#TestResolutionNegotiationError"
+                }
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Resolution Negotiation - Confirmation",
+                "groupName": "InSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "diagnostic": {
+                "advancedOptions": {},
+                "name": "Resolution Negotiation",
+                "category": "Display",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6263#TestResolutionNegotiation",
+                    "fix": "https://help.teradici.com/s/article/6263#TestResolutionNegotiationError"
+                }
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Display Mode",
+                "groupName": "InSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Display Mode",
+                "category": "Display",
+                "result": "Note",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6263#TestFullScreenOrWindows",
+                    "fix": "https://help.teradici.com/s/article/6263#ClientFullScreen"
+                },
+                "notes": "Display Mode: {mode}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Session Disconnection",
+                "groupName": "InSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Session Disconnection",
+                "category": "Session",
+                "result": "Note",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6311#TestDisconnectSession",
+                    "fix": "https://help.teradici.com/s/article/6311#TestDisconnectSessionNote"
+                },
+                "notes": "Session disconnected for reason id: {disconnectCauseId} (hexidecimal)"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Packet Loss",
+                "groupName": "InSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "_disable_aggregationStatement": "countif {received} > 0.02 or {transmitted} > 0.02",
+            "_disable_conditionalStatement": "passed if message else failed",
+            "diagnostic": {
+                "advancedOptions": {
+                    "packetLossThreshould": 0.02
+                },
+                "name": "Packet Loss",
+                "category": "Performance",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6402#TestClientPacketLoss",
+                    "fix": "https://help.teradici.com/s/article/6402#TestClientPacketLossErr"
+                },
+                "notes": "R {receivedAudio}/{receivedImage}/{receivedImage} T {transmittedAudio}/{transmittedImage}/{transmittedOthers} Loss {receptionLoss}/{transmissionLoss}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Latency",
+                "groupName": "InSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "_disable_aggregationStatement": "countif {roundtrip} > 250",
+            "_disable_conditionalStatement": "passed if message else failed",
+            "diagnostic": {
+                "advancedOptions": {
+                    "latencyWarningThreshould": 100,
+                    "latencyFailedThreshould": 250
+                },
+                "name": "Latency",
+                "category": "Performance",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6402#TestClientLatency",
+                    "fix": "https://help.teradici.com/s/article/6402#TestClientLatencyErr"
+                },
+                "notes": "Round Trip {roundtrip} ms"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Jitter",
+                "groupName": "InSession",
+                "domain": "client.pcoip.teradici"
+            },
+            "_disable_aggregationStatement": "countif {variance} > 30",
+            "_disable_conditionalStatement": "passed if message else failed",
+            "diagnostic": {
+                "advancedOptions": {
+                    "jitterWarningThreshould": 30,
+                    "jitterFailedThreshould": 100
+                },
+                "name": "Jitter",
+                "category": "Performance",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6402#TestClientJitter",
+                    "fix": "https://help.teradici.com/s/article/6402#TestClientJitterErr"
+                },
+                "notes": "Variance {variance} ms"
+            }
+        }
+    ]
+}

@@ -1,0 +1,108 @@
+{
+    "readme": "",
+    "diagnostics": [
+        {
+            "dataReference": {
+                "signatureName": "PCoIP cloud license configuration",
+                "groupName": "Install",
+                "domain": "agent.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "License Configuration",
+                "category": "Licensing",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6071#TestLicenseConfig"
+                },
+                "notes": "PCoIP License is configured using cloud server<br>URL: {licenseServerURL}<br>Server ID: {serverIdFromFNEDump}<br>Host ID: {hostId}<br>Host type: {hostType}"              
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "PCoIP local license configuration",
+                "groupName": "Install",
+                "domain": "agent.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "License Configuration",
+                "category": "Licensing",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6071#TestLicenseConfig"
+                },
+                "notes": "PCoIP License is configured using local server<br>URL: {licenseServerURL}<br>Server ID: {serverIdFromFNEDump}<br>Host ID: {hostId}<br>Host type: {hostType}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "PCoIP license is not configuration - Linux - host id and server id available",
+                
+                "groupName": "Install",
+                "domain": "agent.pcoip.teradici"
+            },
+            "diagnostic": {
+                "advancedOptions": {
+                    "isMainDiagnostic": true,
+                    "isAdditionalDiagnostic": false
+                },
+                "name": "License Configuration",
+                "category": "Licensing",
+                "result": "Failed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6071#TestLicenseConfig",
+                    "fix": "https://help.teradici.com/s/article/6071#TestLicenseConfigError"
+                },
+                "notes": "PCoIP license is not configured<br>URL: unknown<br>Server ID: {serverIdFromFNEDump}<br>Host ID: {hostId}<br>Host type: {hostType}"
+            }
+        },           
+        {
+            "dataReference": {
+                "signatureName": "PCoIP local license configuration with missing server id",
+                "groupName": "Install",
+                "domain": "agent.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "License Configuration",
+                "category": "Licensing",                
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6071#TestLicenseConfig"
+                },
+                "notes": "PCoIP License is configured using local server<br>URL: {licenseServerURL}<br>Server ID: unknown<br>Host ID: {hostId}<br>Host type: {hostType}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "PCoIP license is not configuration - Linux - server url and id missing",
+                "groupName": "Install",
+                "domain": "agent.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "License Configuration",
+                "category": "Licensing",                
+                "result": "Failed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6071#TestLicenseConfig",
+                    "fix": "https://help.teradici.com/s/article/6071#TestLicenseConfigError"
+                },
+                "notes": "PCoIP license is not configured<br>URL: unknown<br>Server ID: unavailable<br>Host ID: {hostId}<br>Host type: {hostType}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "PCoIP license is not configuration - Linux - host id has changed",
+                "groupName": "Install",
+                "domain": "agent.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "License Configuration",
+                "result": "Failed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6071#TestLicenseConfig",
+                    "fix": "https://help.teradici.com/s/article/6071#TestLicenseConfigError"
+                },
+                "notes": "PCoIP license is not configured<br>URL: {licenseServerURL}<br>Server ID: {serverIdFromFNEDump}<br>Host ID: {hostId}<br>Host type: {hostType}<br>Host ID has changed"
+            }
+        }        
+    ]
+}

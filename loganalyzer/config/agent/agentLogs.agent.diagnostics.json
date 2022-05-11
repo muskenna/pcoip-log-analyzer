@@ -1,0 +1,385 @@
+{
+    "readme": "",
+    "diagnostics": [
+        {
+            "dataReference": {
+                "signatureName": "Product Info",
+                "groupName": "Install",
+                "domain": "agent.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "name": "Agent Type",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6071#TestType",
+                    "fix": "https://help.teradici.com/s/article/6071#TestAgentTypeErr"
+                },                   
+                "notes": "{type} started successfully"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Product Info - Agent Service Failed to Start",
+                "groupName": "Install",
+                "domain": "agent.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "name": "Agent Type",
+                "category": "Install",
+                "result": "Failed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6071#TestType",
+                    "fix": "https://help.teradici.com/s/article/6071#TestAgentTypeErr"
+                },                   
+                "notes": "{type} failed to start<br>Error: {errorMessage}"
+            }
+        },        
+        {
+            "dataReference": {
+                "signatureName": "Product Info",
+                "groupName": "Install",
+                "domain": "agent.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "advancedOptions":{
+                    "supportedProductVersions": ["21.03.5","21.07.5"]
+                },                
+                "name": "Agent Version",
+                "category": "Install",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6071#TestVersion",
+                    "fix": "https://help.teradici.com/s/article/6071#TestVersionError"
+                },
+                "notes": "{version}"
+            }
+        },        
+        {
+            "dataReference": {
+                "signatureName": "Operating System",
+                "groupName": "Install",
+                "domain": "agent.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "name": "Operating System",
+                "category": "Install",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6071#TestOS",
+                    "fix": "https://help.teradici.com/s/article/6071#TestOSError"
+                },
+                "notes": "{type}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Physical Memory Available",
+                "groupName": "Install",
+                "domain": "agent.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "name": "Memory Check",
+                "category": "Install",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6071#TestMemCheck",
+                    "fix": "https://help.teradici.com/s/article/6071#TestMemError"
+                },
+                "memoryRequirements": [
+                    {
+                        "productName": "PCoIP Standard Agent",
+                        "minimumAvailableMB": "512",
+                        "minimumInstalledMB": "4098"
+                    },
+                    {
+                        "productName": "PCoIP Graphics Agent",
+                        "minimumAvailableMB": "512",
+                        "minimumInstalledMB": "8196"
+                    }                                    
+                ],
+                "notes": ""
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Host Certificate Validation Succeded",
+                "groupName": "Install",
+                "domain": "agent.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "name": "Host Certificate Validation",
+                "category": "Security",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6071#TestCertificate"
+                },
+                "notes": "The host certificate is valid<br>Issuer: {issuer}<br>Subject: {subject}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Host Certificate Validation Self-signed",
+                "groupName": "Install",
+                "domain": "agent.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Host Certificate Validation",
+                "category": "Security",
+                "result": "Warning",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6071#TestCertificate",
+                    "fix": "https://help.teradici.com/s/article/6071#TestCertificateError"
+                },
+                "notes": "{errorMessage}<br>Self-signed certificate was generated"
+            }
+        },         
+        {
+            "dataReference": {
+                "signatureName": "Host Certificate Validation Failed",
+                "groupName": "Install",
+                "domain": "agent.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Host Certificate Validation",
+                "category": "Security",
+                "result": "Failed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6071#TestCertificate",
+                    "fix": "https://help.teradici.com/s/article/6071#TestCertificateError"
+                },
+                "notes": "{errorMessage}<br>The host certificate is invalid or not available"
+            }
+        },                
+        {
+            "dataReference": {
+                "signatureName": "Ultra Supported",
+                "groupName": "Install",
+                "domain": "agent.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "name": "Is host Ultra compatible?",
+                "category": "Install",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6071#TestUltra"
+                },
+                "notes": "{message}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Ultra Not Supported",
+                "groupName": "Install",
+                "domain": "agent.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "name": "Is host Ultra compatible?",
+                "category": "Install",
+                "result": "Warning",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6071#TestUltra",
+                    "fix": "https://help.teradici.com/s/article/6071#TestUltraError"
+                },
+                "notes": "{message}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Resolution Forced",
+                "groupName": "Install",
+                "domain": "agent.pcoip.teradici"
+            },
+            "oncePerReport": true,
+            "diagnostic": {
+                "name": "Resolution fixed?",
+                "category": "Display",
+                "result": "Note",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6102#TestPrimaryDisplayFixed",
+                    "fix": "https://help.teradici.com/s/article/6102#TestPrimaryDisplayFixedError"
+                },
+                "notes": "{resolution}"
+            }
+        },                 
+        {
+            "dataReference": {
+                "signatureName": "Session Initialization",
+                "groupName": "PreSession",
+                "domain": "agent.pcoip.teradici",
+                "isMergingEnabled": false
+            },
+            "diagnostic": {
+                "name": "Session Initialization",
+                "category": "Session",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6312#TestInitiateSession"
+                },                
+                "notes": "{message}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Session Authentication",
+                "groupName": "PreSession",
+                "domain": "agent.pcoip.teradici",
+                "isMergingEnabled": false
+            },
+            "diagnostic": {
+                "name": "Session Authentication",
+                "category": "Session",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6312#TestAuthentication"
+                },
+                "notes": "Session authentication successful"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Session Authentication - Failed to authenticate user",
+                "groupName": "PreSession",
+                "domain": "agent.pcoip.teradici",
+                "isMergingEnabled": false
+            },
+            "diagnostic": {
+                "name": "Session Authentication",
+                "category": "Session",
+                "result": "Failed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6312#TestAuthentication",
+                    "fix": "https://help.teradici.com/s/article/6312#TestAuthenticationError"
+                },
+                "notes": "Session Authentication Failed"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Resource Allocation",
+                "groupName": "PreSession",
+                "domain": "agent.pcoip.teradici",
+                "isMergingEnabled": false
+            },
+            "diagnostic": {
+                "advancedOptions": {},
+                "name": "Resource Allocation",
+                "category": "Session",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6312#TestGetListofHosts"
+                },
+                "notes": "Resource Successfully Allocated"
+            }
+        },        
+        {
+            "dataReference": {
+                "signatureName": "Prepare Host",
+                "groupName": "PreSession",
+                "domain": "agent.pcoip.teradici",
+                "isMergingEnabled": false
+            },
+            "diagnostic": {
+                "name": "Prepare Host",
+                "category": "Session",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6312#TestPrepareHost"
+                },
+                "notes": "Host is ready to accept connection"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Accept Payload",
+                "groupName": "PreSession",
+                "domain": "agent.pcoip.teradici",
+                "isMergingEnabled": false
+            },
+            "diagnostic": {
+                "advancedOptions":{},
+                "name": "Accept Payload",
+                "category": "Session",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6312#TestAcceptPayload",
+                    "fix": "https://help.teradici.com/s/article/6312#TestPayloadError"
+                },
+                "notes": "Payload Accepted<br>Connection accepted from client {clientAddress}"
+            }
+        },              
+        {
+            "dataReference": {
+                "signatureName": "Checkout license - Cloud",
+                "groupName": "PreSession",
+                "domain": "agent.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Checkout license",
+                "category": "Licensing",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6312#TestLicenseAcquired"
+                },
+                "notes": "Cloud license checked out<br>Server URL: {url}<br>Server Id: {serverId}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Checkout license - Local",
+                "groupName": "PreSession",
+                "domain": "agent.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Checkout license",
+                "category": "Licensing",
+                "result": "Passed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6312#TestLicenseAcquired"
+                },
+                "notes": "Local license checked out<br>Server URL: {url}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Checkout license - Unable to reach the license service",
+                "groupName": "PreSession",
+                "domain": "agent.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Checkout license",
+                "category": "Licensing",
+                "result": "Failed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6312#TestLicenseAcquired",
+                    "fix": "https://help.teradici.com/s/article/6312#TestLicensingError"
+                },
+                "notes": "{errorMessage}"
+            }
+        },
+        {
+            "dataReference": {
+                "signatureName": "Checkout license - configuration or license no available",
+                "groupName": "PreSession",
+                "domain": "agent.pcoip.teradici"
+            },
+            "diagnostic": {
+                "name": "Checkout license",
+                "category": "Licensing",
+                "result": "Failed",
+                "urls": {
+                    "description": "https://help.teradici.com/s/article/6312#TestLicenseAcquired",
+                    "fix": "https://help.teradici.com/s/article/6312#TestLicensingError"
+                },
+                "notes": "{errorMessage}"
+            }
+        }    
+    ]
+}

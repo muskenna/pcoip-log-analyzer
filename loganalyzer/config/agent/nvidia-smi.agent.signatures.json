@@ -1,0 +1,40 @@
+{
+    "Install": {
+        "domain": "agent.pcoip.teradici",
+        "signatures": [
+            {
+                "signatureName": "NVIDIA Video Adapter",
+                "signaturePattern": ".*Product Name.*: (.*)$\n.*Product Brand.*: (.*)",
+                "labels": [
+                    "videoAdapter",
+                    "brandName"
+                ],
+                "samples": [
+                    "2021-03-22T16:35:43.5265841Z> <DEBUG>: ",
+                    "==============NVSMI LOG==============",
+                    "...",
+                    "Attached GPUs                             : 1",
+                    "GPU 00000000:00:1E.0",
+                        "Product Name                          : Tesla T4",
+                        "Product Brand                         : Quadro RTX"
+                ]
+            },            
+            {
+                "signatureName": "NVIDIA GRID Licensed",
+                "signaturePattern": ".*Product Name.*: (.*Workstation.*)\n.*License Status.*(Licensed)",
+                "labels": [
+                    "productName",
+                    "licenseStatus"
+                ],
+                "samples": [
+                    "2021-03-22T16:35:43.5265841Z> <DEBUG>: ",
+                    "==============NVSMI LOG==============",
+                    "...",
+                    "    GRID Licensed Product",
+                    "        Product Name                      : Quadro Virtual Data Center Workstation",
+                    "        License Status                    : Licensed"
+                ]
+            }       
+        ]
+    }
+}

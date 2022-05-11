@@ -1,0 +1,43 @@
+{
+    "^pcoip_client.*\\.txt": {
+        "componentType": "client",
+        "contentType": "clientLogs"
+    },    
+    ".*agent\\.(?:log|txt).*|^\\d?.*[-]?pcoip_agent_\\d.*\\.[log|txt]*": {
+        "componentType": "agent",
+        "contentType": "agentLogs"
+    },
+    ".*server\\..*log.*|^\\d?.*[-]?pcoip_server_\\d.*\\.[log|txt]*": {
+        "componentType": "agent",
+        "contentType": "serverLogs"
+    },
+    ".*server-launcher.*log.*": {
+        "componentType": "agent",
+        "contentType": "sessionLauncherLogs"
+    },
+    "^\\d?.*[-]?pcoip_control_panel_\\d.*\\.[log|txt]*": {
+        "componentType": "agent",
+        "contentType": "windowsControlPanelLogs",
+        "OS": "windows"
+    },    
+    "PCoIPSupport_Log.txt": {
+        "componentType": "agent",
+        "contentType": "windowsPCoIPSupportBundle"
+    },
+    "nvidia-smi_-q.out": {
+        "componentType": "agent",
+        "contentType": "nvidia-smi",
+        "OS": "linux"
+    },
+    "pcoip-validate-license_--verbose.out|pcoip-validate-license_--verbose.err|pcoip-list-licenses_-d.out|pcoip-list-licenses_-d.err|.*pcoip-license-tool_dump.*": {
+        "componentType": "agent",
+        "contentType": "linuxPcoipLicenseOut",
+        "mergeFiles": true,
+        "readme": "The regular expression is also used to combine the files together. The code splits the string using the pipeline and the list generated is used to order the file concatenation"
+    },
+    ".*Xorg\\.\\d.*[log|old]*": {
+        "componentType": "agent",
+        "contentType": "linuxXorg",
+        "OS": "linux"
+    }
+}

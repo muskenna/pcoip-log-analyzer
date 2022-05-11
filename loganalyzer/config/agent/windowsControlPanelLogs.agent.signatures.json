@@ -1,0 +1,22 @@
+{
+    "Install": {
+        "domain": "agent.pcoip.teradici",
+        "signatures": [
+            {
+                "signatureName": "PCoIP license is not configuration - Windows - registration Failure due to machine being used in a different organization",
+                "signaturePattern": "^(?P<timestamp_nolic>[0-9-]+T[0-9:.]+Z)>.*stderr.*(?P<message_nolic>no servers are available to list licenses on)|^(?P<timestamp_capreq>[0-9-]+T[0-9:.]+Z)>.*stderr.*(?P<message_capreq>could not send capability request)|^(?P<timestamp_failedreg>[0-9-]+T[0-9:.]+Z)>.*(?P<message_failedreg>Failed to register.*)",
+                "multipleOccurencies": true,
+                "labels": [
+                    "hostType",
+                    "hostId",
+                    "hostName"
+                ],
+                "samples": [
+                    "Set host ID to type = 3, value = YYYYYYYYYYYY",
+                    "Licenses available from https://teradici.compliance.flexnetoperations.com/instances/ZZZZZZZZZZZZ/request:",
+                    "floating server ID: type = 8, value = ZZZZZZZZZZZZ"
+                ]
+            }
+        ]
+    }
+}

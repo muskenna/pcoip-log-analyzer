@@ -1,0 +1,322 @@
+{
+    "Install": {
+        "domain": "agent.pcoip.teradici",
+        "signatures": [
+            {
+                "signatureName": "Product Info",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*Agent type: (.*)$\n.*Software package version: (.*) \\(.*$(?:\n^.+$|\n)+?\n^([0-9-]+T[0-9:.]+Z).*Web Server started successfully.*$",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "type",
+                    "version",
+                    "endTimestamp"
+                ],
+                "samples": [
+                    "2021-08-03T19:40:24.876Z 00000000-0000-0000-0000-000000000000 > LVL:2 RC:   0           AGENT :Agent type: PCoIP Graphics Agent for macOS Big Sur",
+                    "2021-08-03T19:40:25.093Z 00000000-0000-0000-0000-000000000000 > LVL:2 RC:   0           AGENT :Web Server started successfully!"
+                ]
+            },
+            {
+                "signatureName": "Product Info - Agent Service Failed to Start",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*Agent type.*((?i)pcoip.*)$(?:\n^.+$)+?\n^([0-9-]+T[0-9:.]+Z).*Failed to start the Agent: (.*)$",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "type",
+                    "endTimestamp",
+                    "errorMessage"
+                ],
+                "samples": [
+                    "2021-08-04T22:52:07.676Z 00000000-0000-0000-0000-000000000000 > LVL:2 RC:   0           AGENT :Agent type: PCoIP Standard Agent for Windows",
+                    "2021-08-04T22:52:07.687Z 00000000-0000-0000-0000-000000000000 > LVL:0 RC:-500           AGENT :Failed to start the Agent:  failed to load certificates"
+                ]
+            },            
+            {
+                "signatureName": "Operating System",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*System Info.*$(?:\n|\r\n?)+^.*COMMON :(.*(?:Windows|Linux|macOS|MacOS).*)$",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "type"
+                ],
+                "sample": [
+                    "2021-06-03T22:06:32.417Z 00000000-0000-0000-0000-000000000000 LVL:2 RC:   0          COMMON :**** System Info",
+                    "2021-04-06T13:02:58.181Z 00000000-0000-0000-0000-000000000000 LVL:2 RC:   0          COMMON :Windows 10 Professional (10.0 build 18363)"
+                ]
+            },
+            {
+                "signatureName": "Physical Memory Available",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*:(\\d+)MB\/(\\d+)MB of physical memory available",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "availableMB",
+                    "installedMB"
+                ],
+                "sample": [
+                    "2021-03-26T21:33:15.525Z 00000000-0000-0000-0000-000000000000 > LVL:2 RC:   0          COMMON :36397MB/65536MB of physical memory available"
+                ]
+            },
+            {
+                "signatureName": "Host Certificate Validation Succeded",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*tera_certificate_setup: successfully setup external certificate.$(?:\n^.+$)+?\n.*--> Issuer: (.*)$(?:\n^.+$)+?\n.*--> Subject: (.*)$",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "issuer",
+                    "subject"
+                ],
+                "samples": [
+                    "2021-08-23T17:43:04.269Z 00000000-0000-0000-0000-000000000000 > LVL:2 RC:   0           AGENT :tera_certificate_setup: successfully setup external certificate.",
+                    "2021-08-23T17:43:04.269Z 00000000-0000-0000-0000-000000000000 > LVL:2 RC:   0           AGENT :   --> Subject: C=CA,ST=BC,L=Burnaby,O=Teradici,OU=Global Support Service,CN=*.pllab.local "
+                ]
+            },
+            {
+                "signatureName": "Host Certificate Validation Self-signed",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*(No further certificates in cert store.*)(?:\n^.+$)+?\n.*FQDN in punycode format: (.*)$(?:\n^.+$)+?\n.*successfully setup self-signed certificate.*$",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "errorMessage",
+                    "fqdn"
+                ],
+                "samples": [
+                    "2021-08-04T18:43:55.599Z 00000000-0000-0000-0000-000000000000 > LVL:1 RC:   0           AGENT :2028 TeraCertUtilWindows::TeraCertUtilWindows(): No further certificates in cert store \"MY\" match (friendly name) search criteria, examined 1 certificates",
+                    "2021-08-04T18:43:55.599Z 00000000-0000-0000-0000-000000000000 > LVL:3 RC:   0           AGENT :2028 pcoip::certificate::setup_ssl_certificate::<lambda_fb75fc9ae322f99587ded21f9b9facec>::operator (): FQDN in punycode format: s20-clr-27e",
+                    "2021-08-04T18:43:56.445Z 00000000-0000-0000-0000-000000000000 > LVL:2 RC:   0           AGENT :1164 tera_certificate_setup: successfully setup self-signed certificate."
+                ]
+            },
+            {
+                "signatureName": "Host Certificate Validation Failed",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) LVL.*(No further certificates in cert store.*)\n.*Failed to set up external certificate.*\n.*failed to setup configured external certificate.*\n.*setup_ssl_certificate failed.*\n.*Error setting up certificate",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "errorMessage"
+                ],
+                "samples": [
+                    "2021-08-04T18:43:55.599Z 00000000-0000-0000-0000-000000000000 > LVL:1 RC:   0           AGENT :2028 TeraCertUtilWindows::TeraCertUtilWindows(): No further certificates in cert store \"MY\" match (friendly name) search criteria, examined 1 certificates",
+                    "2021-08-05T17:47:12.573Z 00000000-0000-0000-0000-000000000000 > LVL:2 RC:   0     CERTIFICATE :pcoip::certificate::setup_ssl_certificate::<lambda_27ed97c9d40fab115ae946f1777930da>::operator (): Failed to set up external certificate & keys: Could not find an appropriate certificate",
+                    "2021-08-05T17:47:12.573Z 00000000-0000-0000-0000-000000000000 > LVL:2 RC:   0     CERTIFICATE :tera_certificate_setup: failed to setup configured external certificate.",
+                    "2021-08-05T17:47:12.573Z 00000000-0000-0000-0000-000000000000 > LVL:1 RC:-500           SCNET :(scnet_setup_compliant_certificate): pcoip::certificate::setup_ssl_certificate failed",
+                    "2021-08-05T17:47:12.573Z 00000000-0000-0000-0000-000000000000 > LVL:1 RC:-500           SCNET :(server_generate_cert): Error setting up certificate"
+                ]
+            },                                    
+            {
+                "signatureName": "Ultra Supported",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*COMMON :cpu_intrinsics_report: (CPU supports\\s*AVX2)$",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "message"
+                ],
+                "sample": [
+                    "2021-07-09T18:02:30.730Z 00000000-0000-0000-0000-000000000000 LVL:0 RC:   0          COMMON :cpu_intrinsics_report: CPU does not support AVX2"
+                ]
+            },
+            {
+                "signatureName": "Ultra Not Supported",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*COMMON :cpu_intrinsics_report: (CPU does not support AVX2)$$",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "message"
+                ],
+                "sample": [
+                    "2021-07-09T18:02:30.730Z 00000000-0000-0000-0000-000000000000 LVL:0 RC:   0          COMMON :cpu_intrinsics_report: CPU does not support AVX2"
+                ]
+            },
+            {
+                "signatureName": "Resolution Forced",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*MGMT_ENV :Setting ENV variable.*(pcoip.host_side_primary_display_topology=.*)",
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "resolution"
+                ],
+                "samples": [
+                    "2021-03-19T10:39:37.123Z ae246200-6acc-1039-92ca-000000000000 > LVL:2 RC:   0    MGMT_ENV :Setting ENV variable[163]: pcoip.host_side_primary_display_topology = 800x600"
+                ]
+            }                 
+        ]
+    },
+    "PreSession": {
+        "domain": "agent.pcoip.teradici",
+        "signatures": [
+            {
+                "signatureName": "Session Initialization",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*(Received hello.*)$",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "message"
+                ],
+                "samples": [
+                    "2021-03-24T21:10:59.601Z 49756700-6f13-1039-a32b-0050b6df0840 > LVL:2 RC:   0           AGENT :Received hello command!"
+                ]
+            },
+            {
+                "signatureName": "Session Initialization Failures",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*(Received hello.*)$",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "message"
+                ],
+                "samples": [
+                    "2021-03-24T21:10:59.601Z 49756700-6f13-1039-a32b-0050b6df0840 > LVL:2 RC:   0           AGENT :Received hello command!"
+                ]
+            },
+            {
+                "signatureName": "Session Authentication",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*Received authenticate-password.*(?:\n^.+$)+?\n(^[0-9-]+T[0-9:.]+Z).*Received allocate-resource.*",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "endTimestamp"
+                ],
+                "samples": [
+                    "2021-03-24T21:10:59.610Z 49756700-6f13-1039-a32b-0050b6df0840 > LVL:2 RC:   0           AGENT :Received authenticate-password command.",
+                    "2021-04-20T03:28:01.546Z 4ce6fb80-83b6-1039-adcd-000000000000 > LVL:2 RC:   0           AGENT :Received allocate-resource command."
+                ]
+            },
+            {
+                "signatureName": "Session Authentication - Failed to authenticate user",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*handleAuthenticatePassword: failed to authenticate user.*",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "message"
+                ],
+                "samples": [
+                    "2020-09-15T13:38:05.628Z 00000000-0000-0000-0000-000000000000 > LVL:2 RC:   0           AGENT :handleAuthenticatePassword: failed to authenticate user 'cqa' with domain 'z816c-lab1'"
+                ]
+            },
+            {
+                "signatureName": "Resource Allocation",
+                "signaturePattern": "^(?P<timestamp_list>[0-9-]+T[0-9:.]+Z) (?P<sessionid_list>.*) > LVL.*Received get-resource-list command.|^(?P<timestamp_alloc>[0-9-]+T[0-9:.]+Z) (?P<sessionid_alloc>.*) > LVL.*Received allocate-resource command.",
+                "multipleOccurencies": true,
+                "samples": [
+                    "2021-09-16T15:06:18.940Z 455a5d00-f92a-1039-bbc5-000000000000 > LVL:2 RC:   0           AGENT :Received get-resource-list command.",
+                    "2021-09-16T15:06:19.167Z 455a5d00-f92a-1039-bbc5-000000000000 > LVL:2 RC:   0           AGENT :Received allocate-resource command."
+                ]
+            },
+            {
+                "signatureName": "Session Authentication - Failed",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*(Failed to authenticate.*)$",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "message"
+                ],
+                "samples": [
+                    "2021-03-24T21:10:59.610Z 49756700-6f13-1039-a32b-0050b6df0840 > LVL:2 RC:   0           AGENT :Failed to authenticate user 't*****1' with domain 't*****a'"
+                ]
+            },
+            {
+                "signatureName": "Prepare Host",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*Agent type identified.*(?:\n^.+$)+?\n(^[0-9-]+T[0-9:.]+Z).*Starting session\\.\\.\\.$",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "endTimestamp"
+                ],
+                "samples": [
+                    "2021-08-26T13:47:53.033Z 9df58780-e8a1-1039-91ea-000000000000 > LVL:2 RC:   0           AGENT :Agent type identified: PCoIP Graphics Agent for Windows",
+                    "2021-08-26T13:47:53.034Z 9df58780-e8a1-1039-91ea-000000000000 > LVL:2 RC:   0           AGENT :3368 Starting session..."
+                ]
+            },
+            {
+                "signatureName": "Checkout license - Cloud",
+                "signaturePattern": "(?=.*teradici|flexnet)^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*License acquired; source: (.*\/instances\/(.*)\/request).*$",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "url",
+                    "serverId"
+                ],
+                "samples": [
+                    "2021-04-20T14:36:39.830Z 00000000-0000-0000-0000-000000000000 > LVL:2 RC:   0           AGENT :License acquired; source: https://teradici.compliance.flexnetoperations.com/instances/XXXXXXXXXX/request; time: 2.50 s; origin: local-settings; remaining: 160 days;"
+                ]
+            },
+            {
+                "signatureName": "Checkout license - Local",
+                "signaturePattern": "(?!.*teradici|flexnet)^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*License acquired; source: (.*\/request);",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "url"
+                ],
+                "samples": [
+                    "2021-04-20T14:36:39.830Z 00000000-0000-0000-0000-000000000000 > LVL:2 RC:   0           AGENT :License acquired; source: http://mylocalserver:7070/request; time: 0.12 s; origin: local-settings; remaining: 345 days;"
+                ]
+            },
+            {
+                "signatureName": "Checkout license - Unable to reach the license service",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*(Getting license failed: Could not send message to FNE license server.*)$",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "errorMessage"
+                ],
+                "samples": [
+                    "2021-03-18T15:37:08.381Z 00000000-0000-0000-0000-000000000000 > LVL:1 RC:-500           AGENT :Getting license failed: Could not send message to FNE license server. [1,7e4,c,0[74000008,1c,10060221]] Generic communications error.  [1,7e4,c,0[75000001,28,3001025c]] General data transfer failure. Timeout was reached"
+                ]
+            },                     
+            {
+                "signatureName": "Checkout license - configuration or license no available",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*(Could not launch a remote session because.*)$",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "errorMessage"
+                ],
+                "samples": [
+                    "2021-08-26T13:30:20.728Z 00000000-0000-0000-0000-000000000000 > LVL:2 RC:   0           AGENT :Could not launch a remote session because there are no configured license servers",
+                    "2021-04-08T17:26:50.531Z 00000000-0000-0000-0000-000000000000 > LVL:2 RC:   0           AGENT :Could not launch a remote session because no software licenses are available on your cloud license server (https://teradici.compliance.flexnetoperations.com/instances/697HWN71N6JE/request)"
+                ]
+            },          
+            {
+                "signatureName": "Accept Payload",
+                "_signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*Starting PCoIP session for m_sessionInfo.*(?:\n^.+$)+?\n^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*Connection RESPONSE: code=\\(0\\)(?:\n^.+$)+?\n.*Server accepting connection from (.*):\\d*\\.$(?:\n^.+$)+?\n^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*Connection COMPLETE: code=\\(0\\)$",
+                "signaturePattern": "^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*Starting PCoIP session for m_sessionInfo.*(?:\n^.+$)+?\n^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*Connection RESPONSE: code=\\(0\\)(?:\n^.+$)+?\n.*Server accepting connection from (.*):\\d*\\.$(?:\n^.+$)+?\n^([0-9-]+T[0-9:.]+Z) (.*) > LVL.*Connection COMPLETE: code=\\(0\\)$",
+                "multipleOccurencies": true,
+                "labels": [
+                    "timestamp",
+                    "sessionid",
+                    "timestamp_response",
+                    "sessionid_response",
+                    "clientAddress",
+                    "endTimestamp",
+                    "sessionid_complete"
+                ],                
+                "samples": [
+                    "2021-04-20T02:56:54.247Z ccbe9700-83b1-1039-ba91-000000000000 > LVL:2 RC:   0           AGENT :5A34 Starting PCoIP session for m_sessionInfo = 3a6ab5b0...",
+                    "2021-04-20T02:56:55.535Z ccbe9700-83b1-1039-ba91-000000000000 > LVL:1 RC:   0           AGENT :transition from STARTED --(CONFIGURE_DONE [101])--> CONNECTING",
+                    "2021-04-20T02:56:55.628Z ccbe9700-83b1-1039-ba91-000000000000 > LVL:2 RC:   0           AGENT :5A34 Connection RESPONSE: code=(0)",
+                    "2021-04-20T02:56:55.777Z 00000000-0000-0000-0000-000000000000 > LVL:2 RC:   0           SCNET :(scnet_open_accepted_socket): Server accepting connection from 10.20.1.187:58066.",
+                    "2021-04-20T02:56:55.777Z 00000000-0000-0000-0000-000000000000 > LVL:2 RC:   0           SCNET :(scnet_open_accepted_socket): Server connecting on address 192.168.228.68:4172.",                    
+                    "2021-04-20T02:56:56.987Z ccbe9700-83b1-1039-ba91-000000000000 > LVL:2 RC:   0           AGENT :1980 Connection COMPLETE: code=(0)",
+                    "2021-04-20T02:56:56.987Z 00000000-0000-0000-0000-000000000000 > LVL:1 RC:   0           AGENT :transition from CONNECTING --(CONNECTION_COMPLETE [102])--> CONNECTED"
+                ]
+            }          
+        ]
+    },
+    "InSession": {
+        "domain": "agent.pcoip.teradici",
+        "signatures": [
+
+        ]
+    }
+}
